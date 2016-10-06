@@ -1,0 +1,5 @@
+es\udc\pojo\modelutil\exceptions\DuplicateInstanceException.class
+es\udc\pojo\modelutil\exceptions\InstanceException.class
+es\udc\pojo\modelutil\dao\GenericDao.class
+es\udc\pojo\modelutil\dao\GenericDaoHibernate.class
+es\udc\pojo\modelutil\exceptions\InstanceNotFoundException.class
