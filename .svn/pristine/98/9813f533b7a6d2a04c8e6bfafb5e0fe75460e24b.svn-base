@@ -1,0 +1,53 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	t:type="Layout" t:title="title"
+	xmlns:p="tapestry:parameter">
+
+<t:if test="opcion">
+<form t:type="Form" class="form-horizontal" t:id="ApostarForm">
+
+	<t:errors />
+		<div class="form-group">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>${message:nombre-label}</th>
+						<th>${message:categoria-label}</th>
+						<th>${message:fecha-label}</th>
+						<th>${message:tipo-apuesta-label}</th>
+						<th>${message:opcion-apuesta-label}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<td>${opcion.tipoapuesta.evento.nombre}</td>
+					<td>${opcion.tipoapuesta.evento.categoria.nombre}</td>
+					<td><t:output value="opcion.tipoapuesta.evento.fecha.time"
+							format="dateFormat" /></td>
+					<td>${opcion.tipoapuesta.pregunta}</td>
+					<td>${opcion.resultado}</td>
+				</tbody>
+			</table>
+		</div>
+	
+
+	<div class="form-group">
+		<t:Label for="cantidad" class="col-md-offset-3 col-md-2" />
+		<div class="col-md-3">
+			<input t:type="TextField" t:id="cantidad"
+				t:validate="required, min=1" size="10" maxlength="10" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-offset-5 col-md-1">
+			<button type="submit" class="btn btn-primary">${message:apostar}</button>
+		</div>
+	</div>
+
+</form>
+	<p:else>
+		<h4 class="alert alert-danger text-center">${message:betOptionNotFound}</h4>
+	</p:else>
+
+</t:if>
+
+</html>
