@@ -8,12 +8,6 @@
     <version>1.0.0</version>
     <name>${project.artifactId} Project</name>
 
-
-
-    <modules>
-        <module>pojo-modelutil</module>
-    </modules>
-
     <!--
         ===================================================================
     -->
