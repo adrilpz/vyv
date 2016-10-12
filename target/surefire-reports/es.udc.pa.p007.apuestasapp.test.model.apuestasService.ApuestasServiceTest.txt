@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: es.udc.pa.p007.apuestasapp.test.model.apuestasService.ApuestasServiceTest
--------------------------------------------------------------------------------
-Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.789 sec
