@@ -48,7 +48,6 @@
         <sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
         <mavenAssemblyPlugin.version>2.4</mavenAssemblyPlugin.version>
         <jettyMavenPlugin>8.1.15.v20140411</jettyMavenPlugin>
-        <pojo-modelutil.version>2.3.0</pojo-modelutil.version>
                 
     </properties>
 
@@ -172,12 +171,6 @@
     		<artifactId>tapestry-webresources</artifactId>
     		<version>${tapestry.version}</version>
 		</dependency>
-        <!-- POJO-Examples Model Util -->
-        <dependency>
-            <groupId>es.udc.pojo</groupId>
-            <artifactId>pojo-modelutil</artifactId>
-            <version>${pojo-modelutil.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
