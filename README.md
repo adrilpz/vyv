@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/lauramcastro/java-travisCI-test.svg?branch=maven)](https://travis-ci.org/lauramcastro/java-travisCI-test)
 
 Autores: 
-Adri·n LÛpez MartÌnez
+Adri√°n L√≥pez Mart√≠nez
 Brais Rey Souto
 
-Esta aplicaciÛn permite gestionar una p·gina web de p·ginas deportivas. Se pueden ver los eventos disponibles y no disponibles, y hacer apuestas en aquellos que est·n disponibles.
-Adem·s hay dos tipos de usuario, uno normal y un usuario administrador.
+Esta aplicaci√≥n permite gestionar una p√°gina web de apuestas deportivas. Se pueden ver los eventos disponibles y no disponibles. Se puede hacer apuestas en aquellos que est√©n disponibles y comprobar el resultado de aquellos que no lo est√©n.
+Adem√°s hay dos tipos de usuarios, uno normal y un usuario administrador.
