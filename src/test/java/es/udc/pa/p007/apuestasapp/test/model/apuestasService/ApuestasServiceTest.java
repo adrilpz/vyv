@@ -2,23 +2,19 @@ package es.udc.pa.p007.apuestasapp.test.model.apuestasService;
 
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.SessionFactory;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,8 +38,7 @@ import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuestaDao;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuestaDto;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfile;
-import es.udc.pa.p007.apuestasapp.model.userservice.UserProfileDetails;
-import es.udc.pa.p007.apuestasapp.model.userservice.UserService;
+import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfileDao;
 import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -74,7 +69,7 @@ public class ApuestasServiceTest {
 	private OpcionApuestaDao opcionApuestaDao;
 
 	@Autowired
-	private UserService userService;
+	private UserProfileDao userProfileDao;
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -124,8 +119,10 @@ public class ApuestasServiceTest {
 		eventoDao.save(evento4);
 		
 		//Creación usuarios
-		userProfile = userService.registerUser("user", "userPassword", new UserProfileDetails("name", "lastName", "user@udc.es"));
-		userProfile2 = userService.registerUser("user2", "userPassword2", new UserProfileDetails("name2", "lastName2","user@udc.es2"));
+		userProfile = new UserProfile("user", "userPassword", "name", "lastName", "user@udc.es");
+		userProfileDao.save(userProfile);
+		userProfile2 = new UserProfile("user2", "userPassword2", "name2", "lastName2","user@udc.es2");
+		userProfileDao.save(userProfile2);
 		
 		//Creación tipos de apuesta
 		tipoApuesta = new TipoApuesta("Resultado", false, evento);
