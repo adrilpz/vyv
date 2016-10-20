@@ -76,11 +76,11 @@ public class ApuestasServiceTest {
 
 	//VARIABLES GLOBALES
 	Categoria futbol, tenis, formula1, motos;
-	Evento evento,evento2,evento3,evento4;
+	Evento evento,evento2,evento3,evento4, evento5;
 	Calendar fecha, fecha2;
 	UserProfile userProfile, userProfile2;
-	TipoApuesta tipoApuesta, tipoApuesta2, tipoApuesta3, tipoApuesta4;
-	OpcionApuesta opcion, opcion1, opcion2, opcion3, opcion4, opcion5, opcion6, opcion7;
+	TipoApuesta tipoApuesta, tipoApuesta2, tipoApuesta3, tipoApuesta4, tipoApuesta5, tipoApuesta6;
+	OpcionApuesta opcion, opcion1, opcion2, opcion3, opcion4, opcion5, opcion6, opcion7, opcion8, opcion9, opcion10, opcion11, opcion12, opcion13, opcion14, opcion15;
 	Apuesta apuesta, apuesta2, apuesta3, apuesta4;
 	
 	@Before
@@ -118,6 +118,9 @@ public class ApuestasServiceTest {
 		evento4 = new Evento("Nadal - Federer", fecha2, tenis);
 		eventoDao.save(evento4);
 		
+		evento5 = new Evento("Barsa - Madrid", fecha2, futbol);
+		eventoDao.save(evento5);
+		
 		//Creación usuarios
 		userProfile = new UserProfile("user", "userPassword", "name", "lastName", "user@udc.es");
 		userProfileDao.save(userProfile);
@@ -136,6 +139,12 @@ public class ApuestasServiceTest {
 		
 		tipoApuesta4 = new TipoApuesta("Goles", false, evento);
 		tipoApuestaDao.save(tipoApuesta4);
+		
+		tipoApuesta5 = new TipoApuesta("Goleador", true, evento5);
+		tipoApuestaDao.save(tipoApuesta5);
+		
+		tipoApuesta6 = new TipoApuesta("Resultado", false, evento5);
+		tipoApuestaDao.save(tipoApuesta6);
 
 		//Creación de opciones apuesta
 		opcion = new OpcionApuesta("1", 1.40, true, tipoApuesta);
@@ -161,6 +170,30 @@ public class ApuestasServiceTest {
 		
 		opcion7 = new OpcionApuesta("2", 5.00, true, tipoApuesta4);
 		opcionApuestaDao.save(opcion7);
+		
+		opcion8 = new OpcionApuesta("Messi", 1.40, null,tipoApuesta5);
+		opcionApuestaDao.save(opcion8);
+
+		opcion9 = new OpcionApuesta("Neymar", 2.40, null,tipoApuesta5);
+		opcionApuestaDao.save(opcion9);
+
+		opcion10 = new OpcionApuesta("Cristiano", 2.00, null,	tipoApuesta5);
+		opcionApuestaDao.save(opcion10);
+
+		opcion11 = new OpcionApuesta("Benzemá", 2.00, null,	tipoApuesta5);
+		opcionApuestaDao.save(opcion11);
+
+		opcion12 = new OpcionApuesta("Morata", 5.00, null, tipoApuesta5);
+		opcionApuestaDao.save(opcion12);
+		
+		opcion13 = new OpcionApuesta("1", 5.00, true, tipoApuesta6);
+		opcionApuestaDao.save(opcion13);
+		
+		opcion14 = new OpcionApuesta("X", 1.40, null,tipoApuesta6);
+		opcionApuestaDao.save(opcion14);
+
+		opcion15 = new OpcionApuesta("2", 2.40, null,tipoApuesta6);
+		opcionApuestaDao.save(opcion15);
 		
 		//Creación de apuestas
 		apuesta = new Apuesta(opcion, 8, userProfile, fecha);
@@ -265,7 +298,8 @@ public class ApuestasServiceTest {
 		expectedEventos5.add(evento2);
 		expectedEventos5.add(evento3);
 		expectedEventos5.add(evento4);
-		int numberOfEventos = 4;
+		expectedEventos5.add(evento5);
+		int numberOfEventos = 5;
 		int count = 2;
 		int startIndex = 0;
 		EventoBlock eventoBlock5;
@@ -439,19 +473,16 @@ public class ApuestasServiceTest {
 			NotStartedEventException, InputValidationException,
 			ValidateOptionsException, StartedEventException {
 		List<OpcionApuesta> opciones = new ArrayList<OpcionApuesta>();
-		opciones.add(opcion1);
-		opciones.add(opcion2);
-		opciones.add(opcion3);
-		opciones.add(opcion4);
-		opciones.add(opcion5);
-		tipoApuesta2.setOpciones(opciones);
+		opciones.add(opcion8);
+		opciones.add(opcion9);
+		opciones.add(opcion10);
+		opciones.add(opcion11);
+		opciones.add(opcion12);
 		List<Long> opcionesGanadoras = new ArrayList<Long>();
-		opcionesGanadoras.add(opcion1.getCodOpcionApuesta());
-		opcionesGanadoras.add(opcion4.getCodOpcionApuesta());
-		fecha.set(2015, 12, 24);
-		evento.setFecha(fecha);
-		eventoDao.save(evento);
-		apuestasService.marcarOpcionesGanadoras(tipoApuesta2.getCodTipoApuesta(), opcionesGanadoras);
+		opcionesGanadoras.add(opcion8.getCodOpcionApuesta());
+		opcionesGanadoras.add(opcion11.getCodOpcionApuesta());
+		
+		apuestasService.marcarOpcionesGanadoras(tipoApuesta5.getCodTipoApuesta(), opcionesGanadoras);
 		sessionFactory.getCurrentSession().clear();
 		OpcionApuesta o;
 		int cont = 0;
@@ -476,22 +507,12 @@ public class ApuestasServiceTest {
 	public void testMarcarOpcionesGanadorasMarcadasAnteriormente() throws InstanceNotFoundException,
 			NotStartedEventException, InputValidationException,
 			ValidateOptionsException, StartedEventException {
-		List<OpcionApuesta> opciones = new ArrayList<OpcionApuesta>();
-		opciones.add(opcion1);
-		opciones.add(opcion2);
-		opciones.add(opcion3);
-		opciones.add(opcion4);
-		opciones.add(opcion5);
-		tipoApuesta2.setOpciones(opciones);
 		List<Long> opcionesGanadoras = new ArrayList<Long>();
-		opcionesGanadoras.add(opcion1.getCodOpcionApuesta());
-		opcionesGanadoras.add(opcion4.getCodOpcionApuesta());
-		fecha.set(2015, 12, 24);
-		evento.setFecha(fecha);
-		eventoDao.save(evento);
-		apuestasService.marcarOpcionesGanadoras(tipoApuesta2.getCodTipoApuesta(), opcionesGanadoras);
+		opcionesGanadoras.add(opcion8.getCodOpcionApuesta());
+		opcionesGanadoras.add(opcion11.getCodOpcionApuesta());
+		apuestasService.marcarOpcionesGanadoras(tipoApuesta5.getCodTipoApuesta(), opcionesGanadoras);
 		sessionFactory.getCurrentSession().clear();
-		apuestasService.marcarOpcionesGanadoras(tipoApuesta2.getCodTipoApuesta(), opcionesGanadoras);
+		apuestasService.marcarOpcionesGanadoras(tipoApuesta5.getCodTipoApuesta(), opcionesGanadoras);
 	}
 	
 	//PR-UN-024
@@ -499,13 +520,6 @@ public class ApuestasServiceTest {
 	public void testMarcarOpcionesGanadorasMarcadasConEventoNoEmpezado() throws InstanceNotFoundException,
 			NotStartedEventException, InputValidationException,
 			ValidateOptionsException, StartedEventException {
-		List<OpcionApuesta> opciones = new ArrayList<OpcionApuesta>();
-		opciones.add(opcion1);
-		opciones.add(opcion2);
-		opciones.add(opcion3);
-		opciones.add(opcion4);
-		opciones.add(opcion5);
-		tipoApuesta2.setOpciones(opciones);
 		List<Long> opcionesGanadoras = new ArrayList<Long>();
 		opcionesGanadoras.add(opcion1.getCodOpcionApuesta());
 		opcionesGanadoras.add(opcion4.getCodOpcionApuesta());
@@ -517,16 +531,6 @@ public class ApuestasServiceTest {
 	public void testMarcarOpcionesGanadorasMarcadasConTipoApuestaInexistente() throws InstanceNotFoundException,
 			NotStartedEventException, InputValidationException,
 			ValidateOptionsException, StartedEventException {
-		fecha.set(2015, 12, 24);
-		evento.setFecha(fecha);
-		eventoDao.save(evento);
-		List<OpcionApuesta> opciones = new ArrayList<OpcionApuesta>();
-		opciones.add(opcion1);
-		opciones.add(opcion2);
-		opciones.add(opcion3);
-		opciones.add(opcion4);
-		opciones.add(opcion5);
-		tipoApuesta2.setOpciones(opciones);
 		List<Long> opcionesGanadoras = new ArrayList<Long>();
 		opcionesGanadoras.add(opcion1.getCodOpcionApuesta());
 		opcionesGanadoras.add(opcion4.getCodOpcionApuesta());
@@ -538,17 +542,8 @@ public class ApuestasServiceTest {
 	public void testMarcarOpcionesGanadorasMarcadasConListaVacia() throws InstanceNotFoundException,
 			NotStartedEventException, InputValidationException,
 			ValidateOptionsException, StartedEventException {
-		fecha.set(2015, 12, 24);
-		evento.setFecha(fecha);
-		eventoDao.save(evento);
-		List<OpcionApuesta> opciones = new ArrayList<OpcionApuesta>();
-		opciones.add(opcion1);
-		opciones.add(opcion2);
-		opciones.add(opcion3);
-		opciones.add(opcion4);
-		opciones.add(opcion5);
 		List<Long> listaVacia = new ArrayList<Long>();
-		apuestasService.marcarOpcionesGanadoras(tipoApuesta2.getCodTipoApuesta(), listaVacia);
+		apuestasService.marcarOpcionesGanadoras(tipoApuesta5.getCodTipoApuesta(), listaVacia);
 	}
 	
 	//PR-UN-027
@@ -556,21 +551,11 @@ public class ApuestasServiceTest {
 	public void testMarcarOpcionesGanadorasMarcadasConOpcionesInvalidas() throws InstanceNotFoundException,
 			NotStartedEventException, InputValidationException,
 			ValidateOptionsException, StartedEventException {
-		fecha.set(2015, 12, 24);
-		evento.setFecha(fecha);
-		eventoDao.save(evento);
-		List<OpcionApuesta> opciones = new ArrayList<OpcionApuesta>();
-		opciones.add(opcion1);
-		opciones.add(opcion2);
-		opciones.add(opcion3);
-		opciones.add(opcion4);
-		opciones.add(opcion5);
-		tipoApuesta2.setOpciones(opciones);
 		List<Long> opcionesGanadoras = new ArrayList<Long>();
-		opcionesGanadoras.add(opcion1.getCodOpcionApuesta());
-		opcionesGanadoras.add(opcion4.getCodOpcionApuesta());
+		opcionesGanadoras.add(opcion8.getCodOpcionApuesta());
+		opcionesGanadoras.add(opcion11.getCodOpcionApuesta());
 		opcionesGanadoras.add(opcion.getCodOpcionApuesta());
-		apuestasService.marcarOpcionesGanadoras(tipoApuesta2.getCodTipoApuesta(), opcionesGanadoras);
+		apuestasService.marcarOpcionesGanadoras(tipoApuesta5.getCodTipoApuesta(), opcionesGanadoras);
 	}
 
 	//PR-UN-028
@@ -578,20 +563,10 @@ public class ApuestasServiceTest {
 	public void testMarcarOpcionesGanadorasDeApuestaSimpleConMultiplesOpciones() throws InstanceNotFoundException,
 			NotStartedEventException, InputValidationException,
 			ValidateOptionsException, StartedEventException {
-		fecha.set(2015, 12, 24);
-		evento.setFecha(fecha);
-		eventoDao.save(evento);
-		List<OpcionApuesta> opciones = new ArrayList<OpcionApuesta>();
-		opciones.add(opcion1);
-		opciones.add(opcion2);
-		opciones.add(opcion3);
-		opciones.add(opcion4);
-		opciones.add(opcion5);
-		tipoApuesta3.setOpciones(opciones);
 		List<Long> opcionesGanadoras = new ArrayList<Long>();
-		opcionesGanadoras.add(opcion1.getCodOpcionApuesta());
-		opcionesGanadoras.add(opcion2.getCodOpcionApuesta());
-		apuestasService.marcarOpcionesGanadoras(tipoApuesta3.getCodTipoApuesta(), opcionesGanadoras);
+		opcionesGanadoras.add(opcion13.getCodOpcionApuesta());
+		opcionesGanadoras.add(opcion14.getCodOpcionApuesta());
+		apuestasService.marcarOpcionesGanadoras(tipoApuesta6.getCodTipoApuesta(), opcionesGanadoras);
 	}
 
 	//PR-UN-029
@@ -611,7 +586,6 @@ public class ApuestasServiceTest {
 	//PR-UN-031
 	@Test
 	public void testGetCategorias() {
-
 		List<Categoria> expectedCategoria = new ArrayList<Categoria>();
 		expectedCategoria.add(formula1);
 		expectedCategoria.add(futbol);
