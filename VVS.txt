@@ -1,0 +1,452 @@
+(EN PR-UN-006, HAY QUE PONER TAMBIEN CREACION DE OBJETO CATEGORIA?? PORQUE LA CREACION DE UN EVENTO CONLLEVA A LA CREACION DE UNA CATEGORIA)
+(EN PR-UN-015 que salida????)
+(EN PR-UN-015 y PR-UN-018 se mete OpcionApuesta en inicialización o no? porque se iniciativa dentro del método del test, no antes.)
+(EN PR-UN-19 NON_EXISTENT_COD hay que ponerlo como una inicialización? porque solo es un número)
+(EN PR-UN-22 cuales son la inicialización?
+(EN PR-UN-39 en el test en java el nombre del método no debería ser testFindUserProfile() en lugar de FindUserProfile())
+(EN PR-UN-37 hay alguna inicialización?)
+(EN PR-UN-49 hay alguna inicialización?)
+5,6,7,8,9,15,16,27
+
+1.
+a) Código: "PR-UN-001"
+b) Unidade: ApuetasService
+c) Función/método: createEvento()
+d) Motivación: Creación de un evento con valores correctos. Se consideran valores correctos un valor no nulo en el campo nombre y el código de una categoría existente.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+f) Saída(s): objeto de tipo Evento
+g) Inicialización: creación de objeto de tipo Categoria y fecha de tipo Calendar
+
+2.
+a) Código: "PR-UN-002"
+b) Unidade: ApuestasService
+c) Función/método: createEventoWithEmptyName()
+d) Motivación: Se crea una evento con el valor del campo nombre vacío, lo que hace saltar una excepción.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+f) Saída(s): excepción InputValidationException
+g) Inicialización: creación de objeto de tipo Categoria y fecha de tipo Calendar.
+
+3.
+a) Código: "PR-UN-003"
+b) Unidade: ApuestasService
+c) Función/método: createEventoWithNonExistentCategoria()
+d) Motivación: Se crea un evento con un id de categoría que no existe, lo que hace saltar una excepción.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: dcreación de objeto de tipo Categoria y fecha de tipo Calendar.
+
+4.
+a) Código: "PR-UN-004"
+b) Unidade: ApuestasService
+c) Función/método: createEventoInDateBefore()
+d) Motivación: Creación de un evento con una fecha anterior a la actual, lo que se considera un valor fuera de lo normal y hara saltar una excepción.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+f) Saída(s): excepción InputValidationException
+g) Inicialización: creación de objeto de tipo Categoria y fecha de tipo Calendar.
+
+5.
+a) Código: "PR-UN-005"
+b) Unidade: ApuestasService
+c) Función/método: findEventosByCategory()
+d) Motivación: Buscar eventos por categoría especificando valores de entrada correctos. Es decir, 
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+f) Saída(s): lista con objetos de tipo Evento
+g) Inicialización: creación de objeto de tipo Evento
+
+6.
+a) Código: "PR-UN-006"
+b) Unidade: ApuestasService
+c) Función/método: findEventosByCategoryAndName()
+d) Motivación: Buscar eventos por categoría y nombre especificando valores de entrada correctos.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+f) Saída(s): lista con objetos de tipo Evento
+g) Inicialización: creación de objeto de tipo Evento
+
+7.
+a) Código: "PR-UN-007"
+b) Unidade: ApuestasService
+c) Función/método: findEventosByName()
+d) Motivación: Buscar eventos por nombre especificando valores de entrada correctos.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+f) Saída(s): lista con objetos de tipo Evento
+g) Inicialización: creación de objeto de tipo Evento
+
+8.
+a) Código: "PR-UN-008"
+b) Unidade: ApuestasService
+c) Función/método: findEventosByNameBeingAdmin()
+d) Motivación: Buscar eventos por nombre siendo administrador y especificando valores de entrada correctos.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+f) Saída(s): lista con objetos de tipo Evento
+g) Inicialización: creación de objeto de tipo Evento
+
+9.
+a) Código: "PR-UN-009"
+b) Unidade: ApuestasService
+c) Función/método: findEventosPagination()
+d) Motivación:
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+f) Saída(s): lista con objetos de tipo Evento
+g) Inicialización: creación de objetos de tipo Evento
+
+10.
+a) Código: "PR-UN-010"
+b) Unidade: ApuestasService
+c) Función/método: findEventosWithNonExistentCategoria()
+d) Motivación: Buscar eventos introduciendo el código de una categoría que no existe. Un valor correcto para este campo debe ser el código de una categoría existente por lo que saltara una excepción.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: -
+
+11.
+a) Código: "PR-UN-011"
+b) Unidade: ApuestasService
+c) Función/método: createApuestaWithNonExistentOpcion()
+d) Motivación: Se crea una apuesta con una opción de apuesta que no existe. Un valor correcto para este campo debe ser el código de una opción de apuesta existente por lo que saltara una excepción.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: creación de objeto de tipo UserProfile
+
+12.
+a) Código: "PR-UN-012"
+b) Unidade: ApuestasService
+c) Función/método: createApuestaWithNonExistentUser()
+d) Motivación: Se crea una apuesta con usuario que no existe. Un valor correcto para este campo debe ser el código de una usuario existente por lo que saltara una excepción.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: creación de objeto de tipo OpcionApuesta
+
+13.
+a) Código: "PR-UN-013"
+b) Unidade: ApuestasService
+c) Función/método: createApuesta()
+d) Motivación:  Creación de una apuesta con valores correctos. Se consideran valores correctos, una código de opción de apuesta y usuario existentes y una cantidad que no sea negativa.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+f) Saída(s): objeto de tipo Apuesta
+g) Inicialización: creación de objeto de tipo OpcionApuesta y UserProfile
+
+14.
+a) Código: "PR-UN-014”
+b) Unidade: ApuestasService
+c) Función/método: createApuestaWithNegativeQuantity()
+d) Motivación: Se crea una apuesta con un valor negativo en el campo cantidad, lo que hará saltar una excepción.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+f) Saída(s): excepción InputValidationException
+g) Inicialización: creación de objeto de tipo OpcionApuesta y UserProfile
+
+15.
+a) Código: "PR-UN-015”
+b) Unidade: ApuestasService
+c) Función/método: getTiposApuesta()
+d) Motivación: 
+e) Entrada(s): codEvento(Long)
+f) Saída(s): objeto de tipo TipoApuestaDto
+g) Inicialización: creación de objeto de tipo TiposApuesta y Evento
+
+16.
+a) Código: "PR-UN-016”
+b) Unidade: ApuestasService
+c) Función/método: getTiposApuestaWithNonExistentEvento()
+d) Motivación:
+e) Entrada(s): codEvento(Long)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: -
+
+17.
+a) Código: "PR-UN-017”
+b) Unidade: ApuestasService
+c) Función/método: createTipoApuesta()
+d) Motivación: Creación de un tipo de apuesta con valores correctos. Se consideran valores correctos un tipo de apuesta con el campo nombre y multiple no nulo y un código de evento existente y que además no ha empezado.
+e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long) 
+f) Saída(s): objeto de tipo TipoApuesta
+g) Inicialización: creación de objetos de tipo Evento
+
+18.
+a) Código: "PR-UN-018”
+b) Unidade: ApuestasService
+c) Función/método: createTipoApuestaWithEmptyName()
+d) Motivación: Se crea un tipo de apuesta con el campo nombre vacío por lo que saltará una excepción.
+e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long)
+f) Saída(s): excepción InputValidationException
+g) Inicialización: creación de objetos de tipo Evento y TipoApuesta
+
+19.
+a) Código: "PR-UN-019”
+b) Unidade: ApuestasService
+c) Función/método: createTipoApuestaWithoutEvent()
+d) Motivación: Creación de un tipo de apuesta con un código de evento no existente por lo que saltará una excepción.
+e) Entrada(s): codEvento(Long)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: creación de objetos de tipo TiposApuesta y OpcionApuesta
+
+20.
+a) Código: "PR-UN-020”
+b) Unidade: ApuestasService
+c) Función/método: createTipoApuestaWithStartedEvent()
+d) Motivación: Creación de un tipo de apuesta con un evento que ya ha empezado, lo que hará saltar una excepción.
+e) Entrada(s): codEvento(Long)
+f) Saída(s): excepción StartedEventException
+g) Inicialización: creación de objetos de tipo TipoApuesta, OpcionApuesta y Evento
+
+21.
+a) Código: "PR-UN-021”
+b) Unidade: ApuestasService
+c) Función/método: findApuestasByUserId()
+d) Motivación: se buscan las apuestas realizadas por un usuario con valores correctos. Se consideran valores correctos un usuario existen y un startIndex y count no negativos.
+e) Entrada(s): userId(Long), startIndex(int), count(int)
+f) Saída(s): objeto de tipo ApuestaBlock
+g) Inicialización: creación de objeto de tipo UserProfile
+
+22.
+a) Código: "PR-UN-022”
+b) Unidade: ApuestasService
+c) Función/método: marcarOpcionesGanadoras()
+d) Motivación: se marcan las opciones ganadores de un tipo de apuesta con valores correctos. Consideramos valores correctos el código de un tipo de apuesta y de opciones de apuesta existentes cuyo evento ya haya comenzado.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+f) Saída(s): lista con objetos de tipo OpcionApuesta
+g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+
+23.
+a) Código: "PR-UN-023”
+b) Unidade: ApuestasService
+c) Función/método: marcarOpcionesGanadorasMarcadasAnteriormente()
+d) Motivación: se marcan las opciones ganadores de un tipo de apuesta que ya han sido marcadas por lo que saltará una excepción.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) 
+f) Saída(s): excepción ValidateOptionsException
+g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+
+24.
+a) Código: "PR-UN-024”
+b) Unidade: ApuestasService
+c) Función/método: marcarOpcionesGanadorasMarcadasConEventoNoEmpezado()
+d) Motivación: se marcan las opciones ganadores de un tipo de apuesta cuyo evento no ha empezado por lo que saltará una excepción.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+f) Saída(s): excepción NotStartedEventException
+g) Inicialización: creación de objetos de tipo OpcionApuesta y TipoApuesta
+
+25.
+a) Código: "PR-UN-025”
+b) Unidade: ApuestasService
+c) Función/método: marcarOpcionesGanadorasMarcadasConTipoApuestaInexistente()
+d) Motivación: se marcan las opciones ganadores con un código de tipo de apuesta inexistente por lo que saltará una excepción.
+e) Entrada(s): 
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+
+26.
+a) Código: "PR-UN-026”
+b) Unidade: ApuestasService
+c) Función/método: marcarOpcionesGanadorasMarcadasConListaVacia()
+d) Motivación: se marcan las opciones ganadores de un tipo de apuesta cuya lista de opciones está vacía.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+f) Saída(s): excepción ValidateOptionsException
+g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+
+27.
+a) Código: "PR-UN-027”
+b) Unidade: ApuestasService
+c) Función/método: marcarOpcionesGanadorasMarcadasConOpcionesInvalidas()
+d) Motivación: 
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+f) Saída(s): excepción ValidateOptionsException
+g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+
+28.
+a) Código: "PR-UN-028”
+b) Unidade: ApuestasService
+c) Función/método: marcarOpcionesGanadorasDeApuestaSimpleConMultiplesOpciones()
+d) Motivación: 
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+f) Saída(s): excepción ValidateOptionsException
+g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+
+29.
+a) Código: "PR-UN-029”
+b) Unidade: ApuestasService
+c) Función/método: isOpcionesApuestaValidated()
+d) Motivación: se comprueba si las opciones de apuesta de un tipo de apuesta han sido validadas, utilizando valores correctos. Se considera un valor correcto un código de tipo de apuesta existente con sus pertenecientes opciones de apuesta.
+e) Entrada(s): codTipoApuesta(Long)
+f) Saída(s): boolean
+g) Inicialización: creación de objeto de tipo TipoApuesta
+
+30.
+a) Código: "PR-UN-030”
+b) Unidade: ApuestasService
+c) Función/método: isOpcionesApuestaValidatedWithNonExistentTipoApuesta()
+d) Motivación:
+e) Entrada(s): codTipoApuesta(Long)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: -
+
+31.
+a) Código: "PR-UN-031”
+b) Unidade: ApuestasService
+c) Función/método: getCategorias()
+d) Motivación:
+e) Entrada(s): -
+f) Saída(s): Lista de objetos de tipo Categoria
+g) Inicialización: creación de objetos de tipo Categoria
+
+32.
+a) Código: "PR-UN-032”
+b) Unidade: ApuestasService
+c) Función/método: findEvento()
+d) Motivación:
+e) Entrada(s): codEvento(Long)
+f) Saída(s): objeto de tipo Evento
+g) Inicialización: creación de objeto de tipo Evento
+
+33.
+a) Código: "PR-UN-033”
+b) Unidade: ApuestasService
+c) Función/método: findCategoria()
+d) Motivación:
+e) Entrada(s): codCategoria(Long)
+f) Saída(s): objeto de tipo Categoria
+g) Inicialización: creación de objeto de tipo Categoria
+
+34.
+a) Código: "PR-UN-034”
+b) Unidade: ApuestasService
+c) Función/método: findTipoApuesta()
+d) Motivación:
+e) Entrada(s): codTipoApuesta(Long)
+f) Saída(s): objeto de tipo TipoApuesta
+g) Inicialización: creación de objeto de tipo TipoApuesta
+
+35.
+a) Código: "PR-UN-035”
+b) Unidade: ApuestasService
+c) Función/método: findOpcionApuesta()
+d) Motivación:
+e) Entrada(s): codOpcionApuesta(Long)
+f) Saída(s): objeto de tipo OpcionApuesta
+g) Inicialización: creación de objeto de tipo OpcionApuesta
+
+36.
+a) Código: "PR-UN-036”
+b) Unidade: ApuestasService
+c) Función/método: findApuesta()
+d) Motivación:
+e) Entrada(s): codApuesta(Long)
+f) Saída(s): objeto de tipo Apuesta
+g) Inicialización: creación de objeto de tipo Apuesta
+
+37.
+a) Código: "PR-UN-037”
+b) Unidade: ApuestasService
+c) Función/método: registerUser()
+d) Motivación:
+e) Entrada(s): loginName(String), clearPassword(String), userProfileDetails(UserProfileDetails)
+f) Saída(s): objeto de tipo UserProfile
+g) Inicialización: creación de objeto de tipo UserProfile
+
+38.
+a) Código: "PR-UN-038”
+b) Unidade: ApuestasService
+c) Función/método: registerDuplicatedUser()
+d) Motivación:
+e) Entrada(s): loginName(String), clearPassword(String), userProfileDetails(UserProfileDetails)
+f) Saída(s): excepción DuplicateInstanceException
+g) Inicialización: -
+
+39.
+a) Código: "PR-UN-039”
+b) Unidade: ApuestasService
+c) Función/método: findUserProfile()
+d) Motivación:
+e) Entrada(s): userProfileId(Long)
+f) Saída(s): objeto de tipo UserProfile
+g) Inicialización: -
+
+40.
+a) Código: "PR-UN-040”
+b) Unidade: ApuestasService
+c) Función/método: loginClearPassword()
+d) Motivación:
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
+f) Saída(s): objeto de tipo UserProfile
+g) Inicialización: objeto de tipo UserProfile
+
+41.
+a) Código: "PR-UN-041”
+b) Unidade: ApuestasService
+c) Función/método: loginEncryptedPassword()
+d) Motivación:
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
+f) Saída(s): objeto de tipo UserProfile
+g) Inicialización: objeto de tipo UserProfile
+
+42.
+a) Código: "PR-UN-042”
+b) Unidade: ApuestasService
+c) Función/método: loginIncorrectPasword()
+d) Motivación:
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
+f) Saída(s): excepción IncorrectPasswordException
+g) Inicialización: objeto de tipo UserProfile
+
+43.
+a) Código: "PR-UN-043”
+b) Unidade: ApuestasService
+c) Función/método: loginWithNonExistentUser()
+d) Motivación:
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: -
+
+44.
+a) Código: "PR-UN-044”
+b) Unidade: ApuestasService
+c) Función/método: findNonExistentUser()
+d) Motivación:
+e) Entrada(s): userProfileId(Long)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: -
+
+45.
+a) Código: "PR-UN-045”
+b) Unidade: ApuestasService
+c) Función/método: update()
+d) Motivación:
+e) Entrada(s): userProfileId(Long), userProfileDetails(UserProfileDetails)
+f) Saída(s): -
+g) Inicialización: objeto de tipo UserProfile
+
+46.
+a) Código: "PR-UN-046”
+b) Unidade: ApuestasService
+c) Función/método: updateWithNonExistentUser()
+d) Motivación:
+e) Entrada(s): userProfileId(Long), userProfileDetails(UserProfileDetails)
+f) Saída(s): excepción InstanceNotFoundException
+g) Inicialización: -
+
+47.
+a) Código: "PR-UN-047”
+b) Unidade: ApuestasService
+c) Función/método: changePassword()
+d) Motivación:
+e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String)
+f) Saída(s): -
+g) Inicialización: objeto de tipo UserProfile
+
+48.
+a) Código: "PR-UN-048”
+b) Unidade: ApuestasService
+c) Función/método: changePasswordWithIncorrectPassword()
+d) Motivación:
+e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String)
+f) Saída(s): -
+g) Inicialización: objeto de tipo UserProfile
+
+49.
+a) Código: "PR-UN-049”
+b) Unidade: ApuestasService
+c) Función/método: changePasswordWithNonExistentUser()
+d) Motivación:
+e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String)
+f) Saída(s): -
+g) Inicialización: -
+
+
