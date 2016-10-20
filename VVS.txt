@@ -2,7 +2,7 @@
 (EN PR-UN-015 que salida????)
 (EN PR-UN-015 y PR-UN-018 se mete OpcionApuesta en inicialización o no? porque se iniciativa dentro del método del test, no antes.)
 (EN PR-UN-19 NON_EXISTENT_COD hay que ponerlo como una inicialización? porque solo es un número)
-(EN PR-UN-22 cuales son la inicialización?
+(EN PR-UN-22 cuales son la inicialización
 (EN PR-UN-39 en el test en java el nombre del método no debería ser testFindUserProfile() en lugar de FindUserProfile())
 (EN PR-UN-37 hay alguna inicialización?)
 (EN PR-UN-49 hay alguna inicialización?)
