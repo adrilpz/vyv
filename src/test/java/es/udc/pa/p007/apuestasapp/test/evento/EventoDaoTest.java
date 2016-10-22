@@ -73,8 +73,13 @@ public class EventoDaoTest {
 	//PR-UN-062
 	@Test
 	public void testSave() throws InstanceNotFoundException{
+		//Setup
 		Evento eventoPR062 = new Evento("Barsa- Atletico", fecha, futbol);
+		
+		//Llamada
 		eventoDao.save(eventoPR062);
+		
+		//Aserción
 		Evento foundEvento=eventoDao.find(eventoPR062.getCodEvento());
 		assertEquals(eventoPR062, foundEvento);
 	}
@@ -82,20 +87,27 @@ public class EventoDaoTest {
 	//PR-UN-063
 	@Test
 	public void testFind() throws InstanceNotFoundException{
+		//Llamada
 		Evento foundEvento=eventoDao.find(evento.getCodEvento());
+		
+		//Aserción
 		assertEquals(evento, foundEvento);
 	}
 	
 	//PR-UN-064
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		eventoDao.find(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-065
 	/*@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Llamada
 		eventoDao.remove(evento2.getCodApuesta());
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		Evento foundEvento=eventoDao.find(evento2.getCodApuesta());
 		assertNull(foundEvento);
@@ -104,13 +116,17 @@ public class EventoDaoTest {
 	//PR-UN-066
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		eventoDao.remove(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-067
 	@Test
 	public void testFindEventosAbiertos(){
+		//Llamada
 		List<Evento> foundEventos=eventoDao.findEventosAbiertos("barsa", futbol.getCodCategoria(), false, 0, 5);
+		
+		//Aserción
 		assertEquals(foundEventos.size(), 1);
 	}
 }

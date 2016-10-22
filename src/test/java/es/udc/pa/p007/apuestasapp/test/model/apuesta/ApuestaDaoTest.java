@@ -107,8 +107,13 @@ public class ApuestaDaoTest {
 	//PR-UN-050
 	@Test
 	public void testSave() throws InstanceNotFoundException{
+		//Setup
 		Apuesta apuestaPR050 = new Apuesta(opcion, 10, userProfile, fecha);
+		
+		//Llamada
 		apuestaDao.save(apuestaPR050);
+		
+		//Aserción
 		Apuesta foundApuesta=apuestaDao.find(apuestaPR050.getCodApuesta());
 		assertEquals(apuestaPR050, foundApuesta);
 	}
@@ -116,20 +121,27 @@ public class ApuestaDaoTest {
 	//PR-UN-051
 	@Test
 	public void testFind() throws InstanceNotFoundException{
+		//Llamada
 		Apuesta foundApuesta=apuestaDao.find(apuesta.getCodApuesta());
+		
+		//Aserción
 		assertEquals(apuesta, foundApuesta);
 	}
 	
 	//PR-UN-052
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		apuestaDao.find(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-053
 	/*@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Llamada
 		apuestaDao.remove(apuesta2.getCodApuesta());
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		Apuesta foundApuesta=apuestaDao.find(apuesta2.getCodApuesta());
 		assertNull(foundApuesta);
@@ -138,13 +150,17 @@ public class ApuestaDaoTest {
 	//PR-UN-054
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		apuestaDao.remove(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-055
 	@Test
 	public void testFindByUserId(){
+		//Llamada
 		List<Apuesta> foundApuestas=apuestaDao.findByUserId(apuesta.getUsuario().getUserProfileId(), 0, 5);
+		
+		//Aserción
 		assertEquals(foundApuestas.size(), 2);
 	}
 }

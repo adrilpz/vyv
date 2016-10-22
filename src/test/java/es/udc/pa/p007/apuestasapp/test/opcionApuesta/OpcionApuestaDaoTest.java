@@ -2,7 +2,7 @@ package es.udc.pa.p007.apuestasapp.test.opcionApuesta;
 
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -98,8 +98,13 @@ public class OpcionApuestaDaoTest {
 	//PR-UN-068
 	@Test
 	public void testSave() throws InstanceNotFoundException{
+		//Setup
 		OpcionApuesta opcionPR068 = new OpcionApuesta("X", 1.70, null, tipoApuesta);
+		
+		//Llamada
 		opcionApuestaDao.save(opcionPR068);
+		
+		//Aserción
 		OpcionApuesta foundOpcion=opcionApuestaDao.find(opcionPR068.getCodOpcionApuesta());
 		assertEquals(opcionPR068, foundOpcion);
 	}
@@ -107,20 +112,27 @@ public class OpcionApuestaDaoTest {
 	//PR-UN-069
 	@Test
 	public void testFind() throws InstanceNotFoundException{
+		//Llamada
 		OpcionApuesta foundOpcion=opcionApuestaDao.find(opcion.getCodOpcionApuesta());
+		
+		//Aserción
 		assertEquals(opcion, foundOpcion);
 	}
 	
 	//PR-UN-070
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		opcionApuestaDao.find(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-071
 	/*@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Llamada
 		opcionApuestaDao.remove(opcion2.getCodApuesta());
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		OpcionApuesta foundOpcion=opcionApuestaDao.find(opcion2.getCodApuesta());
 		assertNull(foundOpcion);
@@ -129,15 +141,21 @@ public class OpcionApuestaDaoTest {
 	//PR-UN-072
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		opcionApuestaDao.remove(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-073
 	@Test
 	public void testValidarOpciones() throws InstanceNotFoundException{
+		//Setup
 		List<Long> ganadoras=new ArrayList<Long>();
 		ganadoras.add(opcion.getCodOpcionApuesta());
+		
+		//Llamada
 		opcionApuestaDao.validarOpciones(ganadoras);
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		OpcionApuesta foundOpcion=opcionApuestaDao.find(opcion.getCodOpcionApuesta());
 		assertEquals(foundOpcion.isGanadora(), true);
@@ -146,7 +164,10 @@ public class OpcionApuestaDaoTest {
 	//PR-UN-074
 	@Test
 	public void testInValidarOpciones() throws InstanceNotFoundException{
+		//Llamada
 		opcionApuestaDao.invalidarOpcionesPendientes(tipoApuesta2.getCodTipoApuesta());
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		OpcionApuesta foundOpcion4=opcionApuestaDao.find(opcion4.getCodOpcionApuesta());
 		assertEquals(foundOpcion4.isGanadora(), false);
@@ -155,14 +176,21 @@ public class OpcionApuestaDaoTest {
 	//PR-UN-075
 	@Test
 	public void testGetOpcionesApuesta() throws InstanceNotFoundException{
+		//Llamada
 		List<OpcionApuesta> foundOpciones= opcionApuestaDao.getOpcionesApuesta(tipoApuesta.getCodTipoApuesta());
+		
+		//Aserción
 		assertEquals(foundOpciones.size(), 2);
 	}
 	
 	//PR-UN-076
 	@Test
 	public void testIsOpcionesValidated() throws InstanceNotFoundException{
-		assertEquals(opcionApuestaDao.isOpcionesApuestaValidated(tipoApuesta.getCodTipoApuesta()), false);
+		//Llamada
+		boolean validated= opcionApuestaDao.isOpcionesApuestaValidated(tipoApuesta.getCodTipoApuesta());
+		
+		//Aserción
+		assertFalse(validated);
 	}
 	
 }

@@ -36,9 +36,6 @@ import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 public class TipoApuestaDaoTest {
 	
 	private final long NON_EXISTENT_COD = -1;
-	
-	@Autowired
-	private ApuestaDao apuestaDao;
 
 	@Autowired
 	private CategoriaDao categoriaDao;
@@ -84,8 +81,13 @@ public class TipoApuestaDaoTest {
 	//PR-UN-077
 	@Test
 	public void testSave() throws InstanceNotFoundException{
+		//Setup
 		TipoApuesta tipoApuestaPR077 = new TipoApuesta("Goleador", false, evento);
+		
+		//Llamada
 		tipoApuestaDao.save(tipoApuestaPR077);
+		
+		//Aserción
 		TipoApuesta foundTipoApuesta=tipoApuestaDao.find(tipoApuestaPR077.getCodTipoApuesta());
 		assertEquals(tipoApuestaPR077, foundTipoApuesta);
 	}
@@ -93,20 +95,27 @@ public class TipoApuestaDaoTest {
 	//PR-UN-078
 	@Test
 	public void testFind() throws InstanceNotFoundException{
+		//Llamada
 		TipoApuesta foundTipoApuesta=tipoApuestaDao.find(tipoApuesta.getCodTipoApuesta());
+		
+		//Aserción
 		assertEquals(tipoApuesta, foundTipoApuesta);
 	}
 	
 	//PR-UN-079
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		tipoApuestaDao.find(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-080
 	/*@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Llamada
 		tipoApuestaDao.remove(tipoApuesta2.getCodApuesta());
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		TipoApuesta foundTipoApuesta=tipoApuestaDao.find(tipoApuesta2.getCodApuesta());
 		assertNull(foundTipoApuesta);
@@ -115,13 +124,17 @@ public class TipoApuestaDaoTest {
 	//PR-UN-081
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		tipoApuestaDao.remove(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-082
 	@Test
 	public void testFindTiposApuesta(){
+		//Llamada
 		List<TipoApuesta> foundTiposApuesta=tipoApuestaDao.getTiposApuesta(evento.getCodEvento());
+		
+		//Aserción
 		assertEquals(foundTiposApuesta.size(), 2);
 	}
 }

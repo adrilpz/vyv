@@ -60,8 +60,13 @@ public class UserProfileDaoTest {
 	//PR-UN-083
 	@Test
 	public void testSave() throws InstanceNotFoundException{
+		//Setup
 		UserProfile userPR083 = new UserProfile("user3", "userPassword3", "name3", "lastName3", "user3@udc.es");
+		
+		//Llamada
 		userProfileDao.save(userPR083);
+		
+		//Aserción
 		UserProfile foundUser=userProfileDao.find(userPR083.getUserProfileId());
 		assertEquals(userPR083, foundUser);
 	}
@@ -69,20 +74,27 @@ public class UserProfileDaoTest {
 	//PR-UN-084
 	@Test
 	public void testFind() throws InstanceNotFoundException{
+		//Llamada
 		UserProfile foundUser=userProfileDao.find(userProfile.getUserProfileId());
+		
+		//Aserción
 		assertEquals(userProfile, foundUser);
 	}
 	
 	//PR-UN-085
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		userProfileDao.find(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-086
 	/*@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Llamada
 		userProfileDao.remove(user2.getCodApuesta());
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		UserProfile foundUser=userProfileDao.find(user2.getCodApuesta());
 		assertNull(foundUser);
@@ -91,19 +103,24 @@ public class UserProfileDaoTest {
 	//PR-UN-087
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		userProfileDao.remove(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-088
 	@Test
 	public void testFindByUserLogin() throws InstanceNotFoundException{
+		//Llamada
 		UserProfile foundUser=userProfileDao.findByLoginName(userProfile.getLoginName());
+		
+		//Aserción
 		assertEquals(userProfile, foundUser);
 	}
 	
 	//PR-UN-089
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindByUserLoginWithNoExistentLogin() throws InstanceNotFoundException{
+		//Llamada
 		userProfileDao.findByLoginName("");
 	}
 }

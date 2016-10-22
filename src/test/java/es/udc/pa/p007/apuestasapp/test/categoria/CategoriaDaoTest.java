@@ -54,15 +54,19 @@ public class CategoriaDaoTest {
 		categoriaDao.save(futbol);
 		
 		baloncesto = new Categoria("Baloncesto");
-		categoriaDao.save(baloncesto);
-		
+		categoriaDao.save(baloncesto);		
 	}
 	
 	//PR-UN-056
 	@Test
 	public void testSave() throws InstanceNotFoundException{
+		//Setup
 		Categoria categoriaPR056 = new Categoria("categoria");
+		
+		//Llamada
 		categoriaDao.save(categoriaPR056);
+		
+		//Aserción
 		Categoria foundCategoria= categoriaDao.find(categoriaPR056.getCodCategoria());
 		assertEquals(categoriaPR056, foundCategoria);
 	}
@@ -70,20 +74,27 @@ public class CategoriaDaoTest {
 	//PR-UN-057
 	@Test
 	public void testFind() throws InstanceNotFoundException{
+		//Llamada
 		Categoria foundCategoria= categoriaDao.find(futbol.getCodCategoria());
+		
+		//Aserción
 		assertEquals(futbol, foundCategoria);
 	}
 	
 	//PR-UN-058
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		categoriaDao.find(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-059
 	/*@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Llamada
 		categoriaDao.remove(baloncesto.getCodApuesta());
+		
+		//Aserción
 		sessionFactory.getCurrentSession().clear();
 		Categoria foundCategoria=categoriaDao.find(baloncesto.getCodApuesta());
 		assertNull(foundCategoria);
@@ -92,13 +103,17 @@ public class CategoriaDaoTest {
 	//PR-UN-060
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
+		//Llamada
 		categoriaDao.remove(NON_EXISTENT_COD);
 	}
 	
 	//PR-UN-061
 	@Test
 	public void testFindCategorias(){
+		//Llamada
 		List<Categoria> foundCategorias=categoriaDao.findCategorias();
+		
+		//Aserción
 		assertEquals(foundCategorias.size(), 2);
 	}
 }
