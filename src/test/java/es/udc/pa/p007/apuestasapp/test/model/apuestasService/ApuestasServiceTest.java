@@ -340,9 +340,9 @@ public class ApuestasServiceTest {
 	@Test
 	public void testCreateApuesta()
 			throws InstanceNotFoundException, DuplicateInstanceException, InputValidationException, StartedEventException {
-		Apuesta apuestaPR012 = apuestasService.createApuesta(opcion.getCodOpcionApuesta(), 10, userProfile.getUserProfileId());
-		assertNotNull(apuestaPR012);
-		assertEquals(Apuesta.class, apuestaPR012.getClass());
+		Apuesta apuestaPR013 = apuestasService.createApuesta(opcion.getCodOpcionApuesta(), 10, userProfile.getUserProfileId());
+		assertNotNull(apuestaPR013);
+		assertEquals(Apuesta.class, apuestaPR013.getClass());
 	}
 	
 	//PR-UN-014
