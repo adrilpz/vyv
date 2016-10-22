@@ -44,7 +44,7 @@ public class CategoriaDaoTest {
 	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
-	Categoria futbol, baloncesto;
+	private Categoria futbol, baloncesto;
 	
 	@Before
 	public void initialize() {

@@ -53,10 +53,10 @@ public class TipoApuestaDaoTest {
 	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
-	Categoria futbol;
-	Evento evento;
-	Calendar fecha;
-	TipoApuesta tipoApuesta, tipoApuesta2;
+	private Categoria futbol;
+	private Evento evento;
+	private Calendar fecha;
+	private TipoApuesta tipoApuesta, tipoApuesta2;
 	
 	@Before
 	public void initialize() {

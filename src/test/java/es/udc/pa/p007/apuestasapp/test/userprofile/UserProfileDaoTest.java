@@ -44,7 +44,7 @@ public class UserProfileDaoTest {
 	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
-	UserProfile userProfile, userProfile2;
+	private UserProfile userProfile, userProfile2;
 	
 	@Before
 	public void initialize() {		

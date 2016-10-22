@@ -47,9 +47,9 @@ public class EventoDaoTest {
 	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
-	Categoria futbol;
-	Evento evento, evento2;
-	Calendar fecha;
+	private Categoria futbol;
+	private Evento evento, evento2;
+	private Calendar fecha;
 	
 	@Before
 	public void initialize() {

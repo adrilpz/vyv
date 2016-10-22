@@ -75,13 +75,13 @@ public class ApuestasServiceTest {
 	private SessionFactory sessionFactory;
 
 	//VARIABLES GLOBALES
-	Categoria futbol, tenis, formula1, motos;
-	Evento evento,evento2,evento3,evento4, evento5;
-	Calendar fecha, fecha2;
-	UserProfile userProfile, userProfile2;
-	TipoApuesta tipoApuesta, tipoApuesta2, tipoApuesta3, tipoApuesta4, tipoApuesta5, tipoApuesta6;
-	OpcionApuesta opcion, opcion1, opcion2, opcion3, opcion4, opcion5, opcion6, opcion7, opcion8, opcion9, opcion10, opcion11, opcion12, opcion13, opcion14, opcion15;
-	Apuesta apuesta, apuesta2, apuesta3, apuesta4;
+	private Categoria futbol, tenis, formula1, motos;
+	private Evento evento,evento2,evento3,evento4, evento5;
+	private Calendar fecha, fecha2;
+	private UserProfile userProfile, userProfile2;
+	private TipoApuesta tipoApuesta, tipoApuesta2, tipoApuesta3, tipoApuesta4, tipoApuesta5, tipoApuesta6;
+	private OpcionApuesta opcion, opcion1, opcion2, opcion3, opcion4, opcion5, opcion6, opcion7, opcion8, opcion9, opcion10, opcion11, opcion12, opcion13, opcion14, opcion15;
+	private Apuesta apuesta, apuesta2, apuesta3, apuesta4;
 	
 	@Before
 	public void initialize() throws DuplicateInstanceException, InstanceNotFoundException, InputValidationException{

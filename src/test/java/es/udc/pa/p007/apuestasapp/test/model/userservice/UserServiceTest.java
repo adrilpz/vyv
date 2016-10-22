@@ -36,7 +36,7 @@ public class UserServiceTest {
     private UserProfileDao userProfileDao;
     
     //Variables globales
-    UserProfile userProfile;
+    private UserProfile userProfile;
     
     @Before
 	public void initialize(){
