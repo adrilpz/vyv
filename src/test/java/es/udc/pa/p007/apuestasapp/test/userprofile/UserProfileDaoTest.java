@@ -39,9 +39,6 @@ public class UserProfileDaoTest {
 
 	@Autowired
 	private UserProfileDao userProfileDao;
-
-	@Autowired
-	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
 	private UserProfile userProfile, userProfile2;
@@ -89,16 +86,22 @@ public class UserProfileDaoTest {
 	}
 	
 	//PR-UN-086
-	/*@Test
+	@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Setup
+		boolean exceptionCached=false;
+
 		//Llamada
-		userProfileDao.remove(user2.getCodApuesta());
-		
+		userProfileDao.remove(userProfile.getUserProfileId());
+				
 		//Aserción
-		sessionFactory.getCurrentSession().clear();
-		UserProfile foundUser=userProfileDao.find(user2.getCodApuesta());
-		assertNull(foundUser);
-	}*/
+		try {
+			userProfileDao.find(userProfile.getUserProfileId());
+		} catch (InstanceNotFoundException e) {
+			exceptionCached=true;
+		}
+		assertTrue(exceptionCached);
+	}
 	
 	//PR-UN-087
 	@Test(expected=InstanceNotFoundException.class)

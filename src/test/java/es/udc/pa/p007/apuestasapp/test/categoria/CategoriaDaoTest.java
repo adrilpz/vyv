@@ -2,8 +2,9 @@ package es.udc.pa.p007.apuestasapp.test.categoria;
 
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.sql.Connection;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,9 +40,6 @@ public class CategoriaDaoTest {
 
 	@Autowired
 	private CategoriaDao categoriaDao;
-
-	@Autowired
-	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
 	private Categoria futbol, baloncesto;
@@ -89,16 +87,22 @@ public class CategoriaDaoTest {
 	}
 	
 	//PR-UN-059
-	/*@Test
+	@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Setup
+		boolean exceptionCached=false;
+
 		//Llamada
-		categoriaDao.remove(baloncesto.getCodApuesta());
+		categoriaDao.remove(futbol.getCodCategoria());
 		
 		//Aserción
-		sessionFactory.getCurrentSession().clear();
-		Categoria foundCategoria=categoriaDao.find(baloncesto.getCodApuesta());
-		assertNull(foundCategoria);
-	}*/
+		try {
+			categoriaDao.find(futbol.getCodCategoria());
+		} catch (InstanceNotFoundException e) {
+			exceptionCached=true;
+		}
+		assertTrue(exceptionCached);
+	}
 	
 	//PR-UN-060
 	@Test(expected=InstanceNotFoundException.class)

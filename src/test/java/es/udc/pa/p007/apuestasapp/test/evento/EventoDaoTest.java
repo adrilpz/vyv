@@ -3,6 +3,7 @@ package es.udc.pa.p007.apuestasapp.test.evento;
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.List;
@@ -42,9 +43,6 @@ public class EventoDaoTest {
 
 	@Autowired
 	private EventoDao eventoDao;
-
-	@Autowired
-	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
 	private Categoria futbol;
@@ -102,16 +100,22 @@ public class EventoDaoTest {
 	}
 	
 	//PR-UN-065
-	/*@Test
+	@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Setup
+		boolean exceptionCached=false;
+
 		//Llamada
-		eventoDao.remove(evento2.getCodApuesta());
-		
+		eventoDao.remove(evento.getCodEvento());
+			
 		//Aserción
-		sessionFactory.getCurrentSession().clear();
-		Evento foundEvento=eventoDao.find(evento2.getCodApuesta());
-		assertNull(foundEvento);
-	}*/
+		try {
+			eventoDao.find(evento.getCodEvento());
+		} catch (InstanceNotFoundException e) {
+			exceptionCached=true;
+		}
+		assertTrue(exceptionCached);
+	}
 	
 	//PR-UN-066
 	@Test(expected=InstanceNotFoundException.class)

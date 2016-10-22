@@ -19,6 +19,7 @@ import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfileDao;
 import es.udc.pa.p007.apuestasapp.model.userservice.IncorrectPasswordException;
 import es.udc.pa.p007.apuestasapp.model.userservice.UserProfileDetails;
 import es.udc.pa.p007.apuestasapp.model.userservice.UserService;
+import es.udc.pa.p007.apuestasapp.model.userservice.util.PasswordEncrypter;
 import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
@@ -37,11 +38,18 @@ public class UserServiceTest {
     
     //Variables globales
     private UserProfile userProfile;
+    private String loginName, clearPassword;
+    private UserProfileDetails userProfileDetails;
     
     @Before
 	public void initialize(){
+    	//Creación detalles usuario
+    	loginName = "user";
+        clearPassword = "userPassword";
+        userProfileDetails = new UserProfileDetails("name", "lastName", "user@udc.es");
+    	
     	//Creación usuarios
-    	userProfile = new UserProfile("user", "userPassword", "name", "lastName", "user@udc.es");
+    	userProfile = new UserProfile(loginName, PasswordEncrypter.crypt(clearPassword), "name", "lastName", "user@udc.es");
     	userProfileDao.save(userProfile);
     }
 
@@ -49,8 +57,7 @@ public class UserServiceTest {
     @Test
     public void testRegisterUser() throws DuplicateInstanceException{
     	//Llamada
-    	UserProfile userProfilePR037 = userService.registerUser(
-            "prueba", "password", new UserProfileDetails("adrian", "lopez", "adri@udc.es"));
+    	UserProfile userProfilePR037 = userService.registerUser("prueba", "password", userProfileDetails);
         
     	//Aserción
     	assertNotNull(userProfilePR037);
@@ -59,16 +66,9 @@ public class UserServiceTest {
     
     //PR-UN-038
     @Test(expected = DuplicateInstanceException.class)
-    public void testRegisterDuplicatedUser() throws DuplicateInstanceException{
-        //Setup
-    	String loginName = "user";
-        String clearPassword = "userPassword";
-        UserProfileDetails userProfileDetails = new UserProfileDetails(
-            "name", "lastName", "user@udc.es");
-        
+    public void testRegisterDuplicatedUser() throws DuplicateInstanceException{        
       //Llamada
-        userService.registerUser(loginName, clearPassword,
-            userProfileDetails);
+        userService.registerUser(loginName, clearPassword, userProfileDetails);
     }
     
     //PR-UN-039
@@ -82,19 +82,11 @@ public class UserServiceTest {
     }
 
     //PR-UN-040
-    //Quitar llamada al service para register
     @Test
     public void testLoginClearPassword() throws IncorrectPasswordException,
         	InstanceNotFoundException, DuplicateInstanceException {
-        //Setup
-    	String clearPassword = "userPassword";
-        UserProfileDetails userProfileDetails = new UserProfileDetails(
-                "nombre", "apellido", "usuario@udc.es");
-         userProfile = userService.registerUser("usuario", clearPassword, userProfileDetails);
-       
       //Llamada
-        UserProfile loginUserProfile = userService.login(userProfile.getLoginName(),
-            clearPassword, false);
+        UserProfile loginUserProfile = userService.login(userProfile.getLoginName(), clearPassword, false);
         
         //Aserción
         assertEquals(userProfile, loginUserProfile);
@@ -105,8 +97,7 @@ public class UserServiceTest {
     public void testLoginEncryptedPassword() throws IncorrectPasswordException,
             InstanceNotFoundException {
         //Llamada
-    	UserProfile loginUserProfile = userService.login(userProfile.getLoginName(),
-            userProfile.getEncryptedPassword(), true);
+    	UserProfile loginUserProfile = userService.login(userProfile.getLoginName(), userProfile.getEncryptedPassword(), true);
         
     	//Aserción
     	assertEquals(userProfile, loginUserProfile);
@@ -117,9 +108,6 @@ public class UserServiceTest {
     @Test(expected = IncorrectPasswordException.class)
     public void testLoginIncorrectPasword() throws IncorrectPasswordException,
             InstanceNotFoundException {
-        //Setup
-    	String clearPassword = "userPassword";
-        
     	//Llamada
     	userService.login(userProfile.getLoginName(), 'X' + clearPassword, false);
     }
@@ -144,31 +132,19 @@ public class UserServiceTest {
     @Test
     public void testUpdate() throws InstanceNotFoundException,
             IncorrectPasswordException, DuplicateInstanceException {
-    	//Setup
-        String clearPassword = "userPassword";
-        UserProfileDetails userProfileDetails = new UserProfileDetails(
-                "nombre", "apellido", "usuario@udc.es");        
-        userProfile = userService.registerUser("usuario", clearPassword, userProfileDetails);
-        
+    	//Setup        
         UserProfileDetails newUserProfileDetails = new UserProfileDetails(
             'X' + userProfile.getFirstName(), 'X' + userProfile.getLastName(),
             'X' + userProfile.getEmail());
 
         //Llamada
-        userService.updateUserProfileDetails(userProfile.getUserProfileId(),
-            newUserProfileDetails);
+        userService.updateUserProfileDetails(userProfile.getUserProfileId(), newUserProfileDetails);
 
         //Aserción
-        userService.login(userProfile.getLoginName(), clearPassword, false);
-        UserProfile userProfile2 = userService.findUserProfile(
-            userProfile.getUserProfileId());
-
-        assertEquals(newUserProfileDetails.getFirstName(),
-            userProfile2.getFirstName());
-        assertEquals(newUserProfileDetails.getLastName(),
-            userProfile2.getLastName());
-        assertEquals(newUserProfileDetails.getEmail(),
-            userProfile2.getEmail());
+        UserProfile foundUserProfile = userService.findUserProfile(userProfile.getUserProfileId());
+        assertEquals(newUserProfileDetails.getFirstName(), foundUserProfile.getFirstName());
+        assertEquals(newUserProfileDetails.getLastName(), foundUserProfile.getLastName());
+        assertEquals(newUserProfileDetails.getEmail(), foundUserProfile.getEmail());
     }
 
     //PR-UN-046
@@ -180,35 +156,26 @@ public class UserServiceTest {
     }
 
     //PR-UN-047
-    //Quitar llamada al service para login
     @Test
     public void testChangePassword() throws InstanceNotFoundException,
             IncorrectPasswordException, DuplicateInstanceException {
         //Setup
-        String clearPassword = "userPassword";
         String newClearPassword = 'X' + clearPassword;
-        UserProfileDetails userProfileDetails = new UserProfileDetails(
-                "nombre", "apellido", "usuario@udc.es");
-        userProfile = userService.registerUser("usuario", clearPassword, userProfileDetails);
-        
-      //Llamada
-        userService.changePassword(userProfile.getUserProfileId(),
-            clearPassword, newClearPassword);
+      
+        //Llamada
+        userService.changePassword(userProfile.getUserProfileId(), clearPassword, newClearPassword);
         
         //Aserción
-        userService.login(userProfile.getLoginName(), newClearPassword, false);
+        UserProfile loggedUserProfile= userService.login(loginName, newClearPassword, false);
+        assertEquals(userProfile, loggedUserProfile);
     }
-    
+  
     //PR-UN-048
     @Test(expected = IncorrectPasswordException.class)
     public void testChangePasswordWithIncorrectPassword()
             throws InstanceNotFoundException, IncorrectPasswordException {
-        //Setup
-    	String clearPassword = "userPassword";
-        
     	//Llamada
-    	userService.changePassword(userProfile.getUserProfileId(),
-            'X' + clearPassword, 'Y' + clearPassword);
+    	userService.changePassword(userProfile.getUserProfileId(), 'X' + clearPassword, 'Y' + clearPassword);
     }
 
     //PR-UN-049

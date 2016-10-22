@@ -3,6 +3,7 @@ package es.udc.pa.p007.apuestasapp.test.tipoApuesta;
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.List;
@@ -45,9 +46,6 @@ public class TipoApuestaDaoTest {
 
 	@Autowired
 	private TipoApuestaDao tipoApuestaDao;
-
-	@Autowired
-	private SessionFactory sessionFactory;
 	
 	//VARIABLES GLOBALES
 	private Categoria futbol;
@@ -110,16 +108,22 @@ public class TipoApuestaDaoTest {
 	}
 	
 	//PR-UN-080
-	/*@Test
+	@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Setup
+		boolean exceptionCached=false;
+
 		//Llamada
-		tipoApuestaDao.remove(tipoApuesta2.getCodApuesta());
-		
+		tipoApuestaDao.remove(tipoApuesta.getCodTipoApuesta());
+			
 		//Aserción
-		sessionFactory.getCurrentSession().clear();
-		TipoApuesta foundTipoApuesta=tipoApuestaDao.find(tipoApuesta2.getCodApuesta());
-		assertNull(foundTipoApuesta);
-	}*/
+		try {
+			tipoApuestaDao.find(tipoApuesta.getCodTipoApuesta());
+		} catch (InstanceNotFoundException e) {
+			exceptionCached=true;
+		}
+		assertTrue(exceptionCached);
+	}
 	
 	//PR-UN-081
 	@Test(expected=InstanceNotFoundException.class)

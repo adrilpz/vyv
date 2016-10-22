@@ -127,16 +127,22 @@ public class OpcionApuestaDaoTest {
 	}
 	
 	//PR-UN-071
-	/*@Test
+	@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Setup
+		boolean exceptionCached=false;
+
 		//Llamada
-		opcionApuestaDao.remove(opcion2.getCodApuesta());
+		opcionApuestaDao.remove(opcion.getCodOpcionApuesta());
 		
 		//Aserción
-		sessionFactory.getCurrentSession().clear();
-		OpcionApuesta foundOpcion=opcionApuestaDao.find(opcion2.getCodApuesta());
-		assertNull(foundOpcion);
-	}*/
+		try {
+			opcionApuestaDao.find(opcion.getCodOpcionApuesta());
+		} catch (InstanceNotFoundException e) {
+			exceptionCached=true;
+		}
+		assertTrue(exceptionCached);
+	}
 	
 	//PR-UN-072
 	@Test(expected=InstanceNotFoundException.class)

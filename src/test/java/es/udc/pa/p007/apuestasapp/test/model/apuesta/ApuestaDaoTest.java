@@ -58,9 +58,6 @@ public class ApuestaDaoTest {
 	@Autowired
 	private UserProfileDao userProfileDao;
 
-	@Autowired
-	private SessionFactory sessionFactory;
-	
 	//VARIABLES GLOBALES
 	private Categoria futbol;
 	private Evento evento;
@@ -136,16 +133,22 @@ public class ApuestaDaoTest {
 	}
 	
 	//PR-UN-053
-	/*@Test
+	@Test
 	public void testRemove() throws InstanceNotFoundException{
+		//Setup
+		boolean exceptionCached=false;
+
 		//Llamada
-		apuestaDao.remove(apuesta2.getCodApuesta());
-		
+		apuestaDao.remove(apuesta.getCodApuesta());
+			
 		//Aserción
-		sessionFactory.getCurrentSession().clear();
-		Apuesta foundApuesta=apuestaDao.find(apuesta2.getCodApuesta());
-		assertNull(foundApuesta);
-	}*/
+		try {
+			apuestaDao.find(apuesta.getCodApuesta());
+		} catch (InstanceNotFoundException e) {
+			exceptionCached=true;
+		}
+		assertTrue(exceptionCached);
+	}
 	
 	//PR-UN-054
 	@Test(expected=InstanceNotFoundException.class)
