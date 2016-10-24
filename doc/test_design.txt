@@ -1,73 +1,64 @@
-(EN PR-UN-006, HAY QUE PONER TAMBIEN CREACION DE OBJETO CATEGORIA?? PORQUE LA CREACION DE UN EVENTO CONLLEVA A LA CREACION DE UNA CATEGORIA)
-(EN PR-UN-015 que salida????)
-(EN PR-UN-015 y PR-UN-018 se mete OpcionApuesta en inicialización o no? porque se iniciativa dentro del método del test, no antes.)
-(EN PR-UN-19 NON_EXISTENT_COD hay que ponerlo como una inicialización? porque solo es un número)
-(EN PR-UN-22 cuales son la inicialización
-(EN PR-UN-39 en el test en java el nombre del método no debería ser testFindUserProfile() en lugar de FindUserProfile())
-(EN PR-UN-37 hay alguna inicialización?)
-(EN PR-UN-49 hay alguna inicialización?)
-5,6,7,8,9,15,16,27
-
 1.
 a) Código: "PR-UN-001"
 b) Unidade: ApuetasService
 c) Función/método: createEvento()
-d) Motivación: Creación de un evento con valores correctos. Se consideran valores correctos un valor no nulo en el campo nombre y el código de una categoría existente.
-e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+d) Motivación: creación de un evento con valores correctos. Se consideran valores correctos: un valor no vacío en el campo nombre, una fecha posterior a la actual y un código de una categoría existente.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long) -> ("Barsa - Madrid", "24/12/2017", valor no libre)
 f) Saída(s): objeto de tipo Evento
-g) Inicialización: creación de objeto de tipo Categoria y fecha de tipo Calendar
+g) Inicialización: creación de objeto de tipo Categoria
 
 2.
 a) Código: "PR-UN-002"
 b) Unidade: ApuestasService
 c) Función/método: createEventoWithEmptyName()
-d) Motivación: Se crea una evento con el valor del campo nombre vacío, lo que hace saltar una excepción.
-e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+d) Motivación: creación de un evento con el valor del campo nombre vacío (valor frontera) con el objetivo de que salte una excepción ya que no está permitido crear eventos sin nombre. Se consideran valores correctos: un valor no vacío en el campo nombre, una fecha posterior a la actual y un código de una categoría existente.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long) -> ("", "24/12/2017", valor no libre)
 f) Saída(s): excepción InputValidationException
-g) Inicialización: creación de objeto de tipo Categoria y fecha de tipo Calendar.
+g) Inicialización: creación de objeto de tipo Categoria
 
 3.
 a) Código: "PR-UN-003"
 b) Unidade: ApuestasService
 c) Función/método: createEventoWithNonExistentCategoria()
-d) Motivación: Se crea un evento con un id de categoría que no existe, lo que hace saltar una excepción.
-e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+d) Motivación: creación de un evento con un código de una categoría que no existe (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un valor no vacío o nulo en el campo nombre, una fecha posterior a la actual y un código de una categoría existente.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long) -> ("Gran premio China", "24/12/2017", -1);
 f) Saída(s): excepción InstanceNotFoundException
-g) Inicialización: dcreación de objeto de tipo Categoria y fecha de tipo Calendar.
+g) Inicialización: dcreación de objeto de tipo Categoria
 
 4.
 a) Código: "PR-UN-004"
 b) Unidade: ApuestasService
 c) Función/método: createEventoInDateBefore()
-d) Motivación: Creación de un evento con una fecha anterior a la actual, lo que se considera un valor fuera de lo normal y hara saltar una excepción.
-e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long)
+d) Motivación: creación de un evento con una fecha anterior a la actual (valor frontera) con el objetivo de que salte una excepción ya que no está permitido crear eventos con una fecha anterior a la actual. Se consideran valores correctos: un valor no vacío en el campo nombre, una fecha posterior a la actual y un código de una categoría existente.
+e) Entrada(s): nombre(String), fecha(Calendar), categoria(Long) -> ("Sevilla-Betis", "24/11/2015", futbol.getCodCategoria());
 f) Saída(s): excepción InputValidationException
-g) Inicialización: creación de objeto de tipo Categoria y fecha de tipo Calendar.
+g) Inicialización: creación de objeto de tipo Categoria.
 
 5.
 a) Código: "PR-UN-005"
 b) Unidade: ApuestasService
 c) Función/método: findEventosByCategory()
-d) Motivación: Buscar eventos por categoría especificando valores de entrada correctos. Es decir, 
-e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+d) Motivación: búsqueda de eventos por categoría de un usuario no administrador con valores correctos. Se consideran valores correctos: un nombre que debe ser nulo (puesto que solo se buscará por categoría), un código de categoría existente, el campo admin con valor false (que indica que el que realiza la búsqueda no es un usuario administrador), el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> (null, valor no libre, false, 0, 2) 
 f) Saída(s): lista con objetos de tipo Evento
-g) Inicialización: creación de objeto de tipo Evento
+g) Inicialización: creación de objetos de tipo Categoría y Evento
 
 6.
 a) Código: "PR-UN-006"
 b) Unidade: ApuestasService
 c) Función/método: findEventosByCategoryAndName()
-d) Motivación: Buscar eventos por categoría y nombre especificando valores de entrada correctos.
-e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+d) Motivación: búsqueda de eventos por categoría y nombre de un usuario no administrador con valores correctos. Se consideran valores correctos: un valor no vacío o no nulo en el campo nombre, un código de categoría existente, el campo admin con valor false (que indica que el que realiza la búsqueda no es un usuario administrador), el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> ("Depor celt", valor no libre, false, 0, 2)
 f) Saída(s): lista con objetos de tipo Evento
-g) Inicialización: creación de objeto de tipo Evento
+g) Inicialización: creación de objeto de tipo Categoría y Evento
+
 
 7.
 a) Código: "PR-UN-007"
 b) Unidade: ApuestasService
 c) Función/método: findEventosByName()
-d) Motivación: Buscar eventos por nombre especificando valores de entrada correctos.
-e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+d) Motivación: búsqueda de eventos por nombre de un usuario no administrador con valores correctos. Se consideran valores correctos: un valor no vacío o no nulo en el campo nombre, un código de categoría que debe ser nulo (puesto que solo se buscará por nombre), el campo admin con valor false (que indica que el que realiza la búsqueda no es un usuario administrador), el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> ("federer", null, false, 0, 2)
 f) Saída(s): lista con objetos de tipo Evento
 g) Inicialización: creación de objeto de tipo Evento
 
@@ -75,8 +66,8 @@ g) Inicialización: creación de objeto de tipo Evento
 a) Código: "PR-UN-008"
 b) Unidade: ApuestasService
 c) Función/método: findEventosByNameBeingAdmin()
-d) Motivación: Buscar eventos por nombre siendo administrador y especificando valores de entrada correctos.
-e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+d) Motivación: búsqueda de eventos por nombre de un usuario administrador con valores correctos. Se consideran valores correctos: un valor no vacío o no nulo en el campo nombre, un código de categoría que debe ser nulo (puesto que solo se buscará por nombre), el campo admin con valor true (que indica que el que realiza la búsqueda es un usuario administrador), el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> ("federer", null, true, 0, 2);
 f) Saída(s): lista con objetos de tipo Evento
 g) Inicialización: creación de objeto de tipo Evento
 
@@ -85,7 +76,7 @@ a) Código: "PR-UN-009"
 b) Unidade: ApuestasService
 c) Función/método: findEventosPagination()
 d) Motivación:
-e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> (null, null, true, 0, 2)
 f) Saída(s): lista con objetos de tipo Evento
 g) Inicialización: creación de objetos de tipo Evento
 
@@ -93,8 +84,8 @@ g) Inicialización: creación de objetos de tipo Evento
 a) Código: "PR-UN-010"
 b) Unidade: ApuestasService
 c) Función/método: findEventosWithNonExistentCategoria()
-d) Motivación: Buscar eventos introduciendo el código de una categoría que no existe. Un valor correcto para este campo debe ser el código de una categoría existente por lo que saltara una excepción.
-e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int)
+d) Motivación: búsqueda de eventos por categoría de un usuario no administrador con un código de categoría que no existe (valor frontera). Se consideran valores correctos: un nombre que puede ser nulo o vacío si se quiere buscar por categoría o no serlo si se quiere buscar por nombre, un código de categoría existente si se quiere buscar por categoría o nulo si se quiere buscar por nombre, el campo admin con valor false (que indica que el que realiza la búsqueda no es un usuario administrador) o true (que indica que el que realiza la búsqueda es un usuario administrador), el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> ("Depor celt", -1, false, 0,10)
 f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: -
 
@@ -102,8 +93,8 @@ g) Inicialización: -
 a) Código: "PR-UN-011"
 b) Unidade: ApuestasService
 c) Función/método: createApuestaWithNonExistentOpcion()
-d) Motivación: Se crea una apuesta con una opción de apuesta que no existe. Un valor correcto para este campo debe ser el código de una opción de apuesta existente por lo que saltara una excepción.
-e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+d) Motivación: creación de una apuesta con un código de una opción de apuesta que no existe (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una opción de apuesta existente, un valor para el campo cantidad mayor que 0 y un código de un usuario existente.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long) -> (-1, 10, valor no libre);
 f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: creación de objeto de tipo UserProfile
 
@@ -111,8 +102,8 @@ g) Inicialización: creación de objeto de tipo UserProfile
 a) Código: "PR-UN-012"
 b) Unidade: ApuestasService
 c) Función/método: createApuestaWithNonExistentUser()
-d) Motivación: Se crea una apuesta con usuario que no existe. Un valor correcto para este campo debe ser el código de una usuario existente por lo que saltara una excepción.
-e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+d) Motivación: creación de una apuesta con un código de un usuario que no existe (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una opción de apuesta existente, un valor para el campo cantidad mayor que 0 y un código de un usuario existente.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long) -> (valor no libre, 10, -1)
 f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: creación de objeto de tipo OpcionApuesta
 
@@ -120,35 +111,35 @@ g) Inicialización: creación de objeto de tipo OpcionApuesta
 a) Código: "PR-UN-013"
 b) Unidade: ApuestasService
 c) Función/método: createApuesta()
-d) Motivación:  Creación de una apuesta con valores correctos. Se consideran valores correctos, una código de opción de apuesta y usuario existentes y una cantidad que no sea negativa.
-e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+d) Motivación: creación de una apuesta con valores correctos. Se consideran valores correctos: un código de una opción de apuesta existente, un valor para el campo cantidad mayor que 0 y un código de un usuario existente.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long) -> (valor no libre, 10, valor no libre)
 f) Saída(s): objeto de tipo Apuesta
-g) Inicialización: creación de objeto de tipo OpcionApuesta y UserProfile
+g) Inicialización: creación de objetos de tipo OpcionApuesta y UserProfile
 
 14.
 a) Código: "PR-UN-014”
 b) Unidade: ApuestasService
 c) Función/método: createApuestaWithNegativeQuantity()
-d) Motivación: Se crea una apuesta con un valor negativo en el campo cantidad, lo que hará saltar una excepción.
-e) Entrada(s): opcion(Long), cantidad(double), userId(Long)
+d) Motivación: creación de una apuesta con una cantidad igual a 0 (valor frontera) con el objetivo de que salte una excepción ya que no está permitido crear apuestas con una cantidad que no sea mayor que 0. Se consideran valores correctos: un código de una opción de apuesta existente, un valor para el campo cantidad mayor que 0 y un código de un usuario existente.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long) -> (valor no libre, 0, valor no libre)
 f) Saída(s): excepción InputValidationException
-g) Inicialización: creación de objeto de tipo OpcionApuesta y UserProfile
+g) Inicialización: creación de objetos de tipo OpcionApuesta y UserProfile
 
 15.
 a) Código: "PR-UN-015”
 b) Unidade: ApuestasService
 c) Función/método: getTiposApuesta()
-d) Motivación: 
-e) Entrada(s): codEvento(Long)
+d) Motivación: obtención de los tipos de apuesta que ofrece un evento con valores correctos. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): codEvento(Long) -> (valor no libre)
 f) Saída(s): objeto de tipo TipoApuestaDto
-g) Inicialización: creación de objeto de tipo TiposApuesta y Evento
+g) Inicialización: creación de objetos de tipo Evento
 
 16.
 a) Código: "PR-UN-016”
 b) Unidade: ApuestasService
 c) Función/método: getTiposApuestaWithNonExistentEvento()
-d) Motivación:
-e) Entrada(s): codEvento(Long)
+d) Motivación: obtención de los tipos de apuesta que ofrece un evento con un código de evento que no existe (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): codEvento(Long) -> (-1)
 f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: -
 
@@ -156,44 +147,60 @@ g) Inicialización: -
 a) Código: "PR-UN-017”
 b) Unidade: ApuestasService
 c) Función/método: createTipoApuesta()
-d) Motivación: Creación de un tipo de apuesta con valores correctos. Se consideran valores correctos un tipo de apuesta con el campo nombre y multiple no nulo y un código de evento existente y que además no ha empezado.
-e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long) 
+d) Motivación: creación de un tipo de apuesta con valores correctos. Se consideran valores correctos: un tipo de apuesta con el campo nombre y multiple no nulo, una lista de opciones de apuesta y un código de un evento existente y que además no haya empezado.
+e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long) -> (new TipoApuesta("Resultado", false), opcionesNoPersistentes, valor no libre)
+*opcionesNoPersistentes -> List<OpcionApuesta> opcionesNoPersistentes = new ArrayList<OpcionApuesta>();
+			 OpcionApuesta opcionNoPersistente = new OpcionApuesta("2", 1.40, true);
+			 OpcionApuesta opcionNoPersistente2 = new OpcionApuesta("3", 3.4, true);
+			 OpcionApuesta opcionNoPersistente3 = new OpcionApuesta("4", 4.4, true);
 f) Saída(s): objeto de tipo TipoApuesta
-g) Inicialización: creación de objetos de tipo Evento
+g) Inicialización: creación de objeto de tipo Evento
 
 18.
 a) Código: "PR-UN-018”
 b) Unidade: ApuestasService
 c) Función/método: createTipoApuestaWithEmptyName()
-d) Motivación: Se crea un tipo de apuesta con el campo nombre vacío por lo que saltará una excepción.
-e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long)
+d) Motivación: creación de un tipo de apuesta con el valor del campo nombre vacío (valor frontera) con el objetivo de que salte una excepción ya que no está permitido crear tipos de apuesta sin nombre. Se consideran valores correctos: un tipo de apuesta con el campo nombre y multiple no nulo, una lista de opciones de apuesta y un código de un evento existente y que además no haya empezado.
+e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long) -> (new TipoApuesta("", false), opcionesNoPersistentes, valor no libre)
+*opcionesNoPersistentes -> List<OpcionApuesta> opcionesNoPersistentes = new ArrayList<OpcionApuesta>();
+			 OpcionApuesta opcionNoPersistente = new OpcionApuesta("2", 1.40, true);
+			 OpcionApuesta opcionNoPersistente2 = new OpcionApuesta("3", 3.4, true);
+			 OpcionApuesta opcionNoPersistente3 = new OpcionApuesta("4", 4.4, true);
 f) Saída(s): excepción InputValidationException
-g) Inicialización: creación de objetos de tipo Evento y TipoApuesta
+g) Inicialización: creación de objeto de tipo Evento
 
 19.
 a) Código: "PR-UN-019”
 b) Unidade: ApuestasService
 c) Función/método: createTipoApuestaWithoutEvent()
-d) Motivación: Creación de un tipo de apuesta con un código de evento no existente por lo que saltará una excepción.
-e) Entrada(s): codEvento(Long)
+d) Motivación: creación de un tipo de apuesta con un código de evento que no existe (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción.Se consideran valores correctos: un tipo de apuesta con el campo nombre y multiple no nulo, una lista de opciones de apuesta y un código de un evento existente y que además no haya empezado.
+e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long) -> (new TipoApuesta("Resultado", false), opcionesNoPersistentes, -1)
+*opcionesNoPersistentes -> List<OpcionApuesta> opcionesNoPersistentes = new ArrayList<OpcionApuesta>();
+			 OpcionApuesta opcionNoPersistente = new OpcionApuesta("2", 1.40, true);
+			 OpcionApuesta opcionNoPersistente2 = new OpcionApuesta("3", 3.4, true);
+			 OpcionApuesta opcionNoPersistente3 = new OpcionApuesta("4", 4.4, true);
 f) Saída(s): excepción InstanceNotFoundException
-g) Inicialización: creación de objetos de tipo TiposApuesta y OpcionApuesta
+g) Inicialización: -
 
 20.
 a) Código: "PR-UN-020”
 b) Unidade: ApuestasService
 c) Función/método: createTipoApuestaWithStartedEvent()
-d) Motivación: Creación de un tipo de apuesta con un evento que ya ha empezado, lo que hará saltar una excepción.
-e) Entrada(s): codEvento(Long)
+d) Motivación: creación de un tipo de apuesta con un código de un evento que ya ha comenzado con el objetivo de que salte una excepción.Se consideran valores correctos: un tipo de apuesta con el campo nombre y multiple no nulo, una lista de opciones de apuesta y un código de un evento existente y que además no haya empezado.
+e) Entrada(s): tipoApuesta(TipoApuesta), opciones(List<OpcionApuesta>), eventId(Long) -> (new TipoApuesta("Resultado", false), opcionesNoPersistentes, valor no libre)
+*opcionesNoPersistentes -> List<OpcionApuesta> opcionesNoPersistentes = new ArrayList<OpcionApuesta>();
+			 OpcionApuesta opcionNoPersistente = new OpcionApuesta("2", 1.40, true);
+			 OpcionApuesta opcionNoPersistente2 = new OpcionApuesta("3", 3.4, true);
+			 OpcionApuesta opcionNoPersistente3 = new OpcionApuesta("4", 4.4, true);
 f) Saída(s): excepción StartedEventException
-g) Inicialización: creación de objetos de tipo TipoApuesta, OpcionApuesta y Evento
+g) Inicialización: creación de objeto de tipo Evento
 
 21.
 a) Código: "PR-UN-021”
 b) Unidade: ApuestasService
 c) Función/método: findApuestasByUserId()
-d) Motivación: se buscan las apuestas realizadas por un usuario con valores correctos. Se consideran valores correctos un usuario existen y un startIndex y count no negativos.
-e) Entrada(s): userId(Long), startIndex(int), count(int)
+d) Motivación: búsqueda de apuestas por código de un usuario con valores correctos. Se consideran valores correctos: un código de usuario existente, el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): userId(Long), startIndex(int), count(int) -> (valor no valido, 0, 2);
 f) Saída(s): objeto de tipo ApuestaBlock
 g) Inicialización: creación de objeto de tipo UserProfile
 
@@ -201,55 +208,72 @@ g) Inicialización: creación de objeto de tipo UserProfile
 a) Código: "PR-UN-022”
 b) Unidade: ApuestasService
 c) Función/método: marcarOpcionesGanadoras()
-d) Motivación: se marcan las opciones ganadores de un tipo de apuesta con valores correctos. Consideramos valores correctos el código de un tipo de apuesta y de opciones de apuesta existentes cuyo evento ya haya comenzado.
-e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+d) Motivación: marcación de las opciones de apuesta ganadoras de un tipo de apuesta con valores correctos. Se consideran valores correctos: un código de un tipo de apuesta existente cuyo evento al que hace referencia ya haya empezado y una lista no vacía de opciones de apuesta que no hayan sido marcadas ni invalidadas.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) -> (valor no libre, opcionesGanadoras)
+*opcionesGanadoras -> List<Long> opcionesGanadoras = new ArrayList<Long>();
+		       opcionesGanadoras.add(valor no libre);
+		       opcionesGanadoras.add(valor no libre);
 f) Saída(s): lista con objetos de tipo OpcionApuesta
-g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+g) Inicialización: creación de objetos de tipo TipoApuesta
 
 23.
 a) Código: "PR-UN-023”
 b) Unidade: ApuestasService
 c) Función/método: marcarOpcionesGanadorasMarcadasAnteriormente()
-d) Motivación: se marcan las opciones ganadores de un tipo de apuesta que ya han sido marcadas por lo que saltará una excepción.
-e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) 
+d) Motivación: marcación de las opciones de apuesta ganadoras de un tipo de apuesta que ya han sido marcadas con el objetivo de que salte una excepción ya que no se pueden marcar las opciones ganadoras si ya han sido marcadas. Se consideran valores correctos: un código de un tipo de apuesta existente cuyo evento al que hace referencia ya haya empezado y una lista no vacía de opciones de apuesta que no hayan sido marcadas ni invalidadas.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) -> (valor no valido, opcionesGanadoras)
+*opcionesganadoras -> List<Long> opcionesGanadoras = new ArrayList<Long>();
+		      opcionesGanadoras.add(valor no libre);
+		      opcionesGanadoras.add(valor no libre);
 f) Saída(s): excepción ValidateOptionsException
-g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+g) Inicialización: creación de objetos de tipo TipoApuesta
 
 24.
 a) Código: "PR-UN-024”
 b) Unidade: ApuestasService
 c) Función/método: marcarOpcionesGanadorasMarcadasConEventoNoEmpezado()
-d) Motivación: se marcan las opciones ganadores de un tipo de apuesta cuyo evento no ha empezado por lo que saltará una excepción.
-e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+d) Motivación: marcación de las opciones de apuesta ganadoras de un tipo de apuesta cuyo evento al que hace referencia ya ha empezado (valor frontera) con el objetivo de que salte una excepción ya que no se pueden marcar opciones ganadoras si el evento ya ha comenzado. Se consideran valores correctos: un código de un tipo de apuesta existente cuyo evento al que hace referencia ya haya empezado y una lista no vacía de opciones de apuesta que no hayan sido marcadas ni invalidadas.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) -> (valor no libre, opcionesGanadoras)
+*opcionesGanadoras -> List<Long> opcionesGanadoras = new ArrayList<Long>();
+		      opcionesGanadoras.add(valor no libre);
+		      opcionesGanadoras.add(valor no libre);
 f) Saída(s): excepción NotStartedEventException
-g) Inicialización: creación de objetos de tipo OpcionApuesta y TipoApuesta
+g) Inicialización: creación de objetos de tipo TipoApuesta
 
 25.
 a) Código: "PR-UN-025”
 b) Unidade: ApuestasService
 c) Función/método: marcarOpcionesGanadorasMarcadasConTipoApuestaInexistente()
-d) Motivación: se marcan las opciones ganadores con un código de tipo de apuesta inexistente por lo que saltará una excepción.
-e) Entrada(s): 
+d) Motivación: marcación de las opciones de apuesta ganadoras de un tipo de apuesta con un código de tipo de apuesta que no existe (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un tipo de apuesta existente cuyo evento al que hace referencia ya haya empezado y una lista no vacía de opciones de apuesta que no hayan sido marcadas ni invalidadas.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) -> (-1,opcionesGanadoras)
+*opcionesGanadoras -> List<Long> opcionesGanadoras = new ArrayList<Long>();
+		      opcionesGanadoras.add(valor no libre);
+		      opcionesGanadoras.add(valor no libre);
 f) Saída(s): excepción InstanceNotFoundException
-g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+g) Inicialización: creación de objetos de tipo TipoApuesta
 
 26.
 a) Código: "PR-UN-026”
 b) Unidade: ApuestasService
 c) Función/método: marcarOpcionesGanadorasMarcadasConListaVacia()
-d) Motivación: se marcan las opciones ganadores de un tipo de apuesta cuya lista de opciones está vacía.
-e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+d) Motivación: marcación de las opciones de apuesta ganadoras de un tipo de apuesta con una lista de opciones de apuesta vacía con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un tipo de apuesta existente cuyo evento al que hace referencia ya haya empezado y una lista no vacía de opciones de apuesta que no hayan sido marcadas ni invalidadas.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) -> (valor no libre, listaVacia)
+*listaVacia -> List<Long> listaVacia = new ArrayList<Long>();
 f) Saída(s): excepción ValidateOptionsException
-g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+g) Inicialización: creación de objetos de tipo TipoApuesta
 
 27.
 a) Código: "PR-UN-027”
 b) Unidade: ApuestasService
 c) Función/método: marcarOpcionesGanadorasMarcadasConOpcionesInvalidas()
-d) Motivación: 
-e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
+d) Motivación: marcación de las opciones de apuesta ganadoras de un tipo de apuesta con una lista de opciones que han sido invalidadas con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un tipo de apuesta existente cuyo evento al que hace referencia ya haya empezado y una lista no vacía de opciones de apuesta que no hayan sido marcadas ni invalidadas.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) -> (valor no libre, opcionesGanadoras)
+*opcionesGanadoras -> List<Long> opcionesGanadoras = new ArrayList<Long>();
+		      opcionesGanadoras.add(opcion1.getCodOpcionApuesta());
+		      opcionesGanadoras.add(opcion4.getCodOpcionApuesta());
+		      opcionesGanadoras.add(opcion.getCodOpcionApuesta());
 f) Saída(s): excepción ValidateOptionsException
-g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+g) Inicialización: creación de objetos de tipo TipoApuesta
 
 28.
 a) Código: "PR-UN-028”
@@ -258,14 +282,14 @@ c) Función/método: marcarOpcionesGanadorasDeApuestaSimpleConMultiplesOpciones(
 d) Motivación: 
 e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>)
 f) Saída(s): excepción ValidateOptionsException
-g) Inicialización: creación de objetos de tipo OpcionApuesta, TipoApuesta, Calendar, y Evento
+g) Inicialización: creación de objetos de tipo TipoApuesta
 
 29.
 a) Código: "PR-UN-029”
 b) Unidade: ApuestasService
 c) Función/método: isOpcionesApuestaValidated()
-d) Motivación: se comprueba si las opciones de apuesta de un tipo de apuesta han sido validadas, utilizando valores correctos. Se considera un valor correcto un código de tipo de apuesta existente con sus pertenecientes opciones de apuesta.
-e) Entrada(s): codTipoApuesta(Long)
+d) Motivación: comprobación de si las opciones de apuesta de un tipo de apuesta han sido validadas utilizando valores correctos. Se consideran valores correctos: un código de tipo de apuesta existente con sus pertenecientes opciones de apuesta.
+e) Entrada(s): codTipoApuesta(Long) -> (valor no libre)
 f) Saída(s): boolean
 g) Inicialización: creación de objeto de tipo TipoApuesta
 
@@ -273,8 +297,8 @@ g) Inicialización: creación de objeto de tipo TipoApuesta
 a) Código: "PR-UN-030”
 b) Unidade: ApuestasService
 c) Función/método: isOpcionesApuestaValidatedWithNonExistentTipoApuesta()
-d) Motivación:
-e) Entrada(s): codTipoApuesta(Long)
+d) Motivación: comprobación de si las opciones de apuesta de un tipo de apuesta han sido validadas con un código de tipo de apuesta que no existe (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de tipo de apuesta existente con sus pertenecientes opciones de apuesta.
+e) Entrada(s): codTipoApuesta(Long) -> (-1)
 f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: -
 
@@ -282,7 +306,7 @@ g) Inicialización: -
 a) Código: "PR-UN-031”
 b) Unidade: ApuestasService
 c) Función/método: getCategorias()
-d) Motivación:
+d) Motivación: obtención de las categorías.
 e) Entrada(s): -
 f) Saída(s): Lista de objetos de tipo Categoria
 g) Inicialización: creación de objetos de tipo Categoria
@@ -291,8 +315,8 @@ g) Inicialización: creación de objetos de tipo Categoria
 a) Código: "PR-UN-032”
 b) Unidade: ApuestasService
 c) Función/método: findEvento()
-d) Motivación:
-e) Entrada(s): codEvento(Long)
+d) Motivación: búsqueda de un evento con valores correctos. Se consideran valores correctos: un código de evento existente.
+e) Entrada(s): codEvento(Long) -> (valor no libre)
 f) Saída(s): objeto de tipo Evento
 g) Inicialización: creación de objeto de tipo Evento
 
@@ -300,8 +324,8 @@ g) Inicialización: creación de objeto de tipo Evento
 a) Código: "PR-UN-033”
 b) Unidade: ApuestasService
 c) Función/método: findCategoria()
-d) Motivación:
-e) Entrada(s): codCategoria(Long)
+d) Motivación: obtención de una categoría con valores correctos. Se consideran valores correctos: un código de categoría existente.
+e) Entrada(s): codCategoria(Long) -> (valor no libre)
 f) Saída(s): objeto de tipo Categoria
 g) Inicialización: creación de objeto de tipo Categoria
 
@@ -309,8 +333,8 @@ g) Inicialización: creación de objeto de tipo Categoria
 a) Código: "PR-UN-034”
 b) Unidade: ApuestasService
 c) Función/método: findTipoApuesta()
-d) Motivación:
-e) Entrada(s): codTipoApuesta(Long)
+d) Motivación: obteción de un tipo de apuesta con valores correctos. Se consideran valores correctos: un código de tipo de apuesta existente.
+e) Entrada(s): codTipoApuesta(Long) -> (valor no libre)
 f) Saída(s): objeto de tipo TipoApuesta
 g) Inicialización: creación de objeto de tipo TipoApuesta
 
@@ -318,8 +342,8 @@ g) Inicialización: creación de objeto de tipo TipoApuesta
 a) Código: "PR-UN-035”
 b) Unidade: ApuestasService
 c) Función/método: findOpcionApuesta()
-d) Motivación:
-e) Entrada(s): codOpcionApuesta(Long)
+d) Motivación: obteción de una opción de apuesta con valores correctos. Se consideran valores correctos: un código de opción de apuesta existente.
+e) Entrada(s): codOpcionApuesta(Long) -> (valor no libre)
 f) Saída(s): objeto de tipo OpcionApuesta
 g) Inicialización: creación de objeto de tipo OpcionApuesta
 
@@ -327,80 +351,80 @@ g) Inicialización: creación de objeto de tipo OpcionApuesta
 a) Código: "PR-UN-036”
 b) Unidade: ApuestasService
 c) Función/método: findApuesta()
-d) Motivación:
-e) Entrada(s): codApuesta(Long)
+d) Motivación: obteción de una apuesta con valores correctos. Se consideran valores correctos: un código de apuesta existente.
+e) Entrada(s): codApuesta(Long) -> (valor no libre)
 f) Saída(s): objeto de tipo Apuesta
 g) Inicialización: creación de objeto de tipo Apuesta
 
 37.
 a) Código: "PR-UN-037”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: registerUser()
-d) Motivación:
-e) Entrada(s): loginName(String), clearPassword(String), userProfileDetails(UserProfileDetails)
+d) Motivación: se registra un nuevo usuario con valores correctos. Se consideran valores correctos un valor no nulo o no vacío en el campo loginName y clearPassword y un UserProfileDetails con valores no nulos.
+e) Entrada(s): loginName(String), clearPassword(String), userProfileDetails(UserProfileDetails) -> ("prueba", "password", new UserProfileDetails("adrian", "lopez", "adri@udc.es"))
 f) Saída(s): objeto de tipo UserProfile
 g) Inicialización: creación de objeto de tipo UserProfile
 
 38.
 a) Código: "PR-UN-038”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: registerDuplicatedUser()
-d) Motivación:
-e) Entrada(s): loginName(String), clearPassword(String), userProfileDetails(UserProfileDetails)
+d) Motivación: se registra un usuario que ya ha sido registrado (valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos un valor no nulo o no vacío en el campo loginName y clearPassword y un UserProfileDetails con valores no nulos.
+e) Entrada(s): loginName(String), clearPassword(String), userProfileDetails(UserProfileDetails) -> ("user", "userPassword", new UserProfileDetails("name", "lastName", "user@udc.es"))
 f) Saída(s): excepción DuplicateInstanceException
-g) Inicialización: -
+g) Inicialización: creación de objeto de tipo userProfile
 
 39.
 a) Código: "PR-UN-039”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: findUserProfile()
-d) Motivación:
-e) Entrada(s): userProfileId(Long)
+d) Motivación: búsqueda de un usuario con valores correctos. Se consideran valores correctos: un código de usuario existente.
+e) Entrada(s): userProfileId(Long) -> (valor no libre)
 f) Saída(s): objeto de tipo UserProfile
-g) Inicialización: -
+g) Inicialización: creación de objeto de tipo userProfile
 
 40.
 a) Código: "PR-UN-040”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: loginClearPassword()
-d) Motivación:
-e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
-f) Saída(s): objeto de tipo UserProfile
-g) Inicialización: objeto de tipo UserProfile
+d) Motivación: logeo de un usuario con contraseña en claro. Se consideran valores correctos: un valor no nulo o no vacío en el campo nombre y password y un valor false en el campo passwordIsEncrypted indicando que la constraseña no está encriptada.
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean) -> ("usuario","userPassword", false)
+f) Saída(s): objeto de tipo UserProfile 
+g) Inicialización: creación de objeto de tipo UserProfile
 
 41.
 a) Código: "PR-UN-041”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: loginEncryptedPassword()
-d) Motivación:
-e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
-f) Saída(s): objeto de tipo UserProfile
-g) Inicialización: objeto de tipo UserProfile
+d) Motivación: logeo de un usuario con contraseña encriptada. Se consideran valores correctos: un valor no nulo o no vacío en el campo nombre, un valor encriptado en el campo password y un valor true en el campo passwordIsEncrypted indicando que la constraseña está encriptada.
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean) -> ("user", valor no libre, true)
+f) Saída(s): objeto de tipo UserProfile 
+g) Inicialización: creación de objeto de tipo UserProfile
 
 42.
 a) Código: "PR-UN-042”
 b) Unidade: ApuestasService
 c) Función/método: loginIncorrectPasword()
-d) Motivación:
-e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
+d) Motivación: logeo de un usuario con contraseña incorrecta (valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un valor no nulo o no vacío en el campo nombre, un valor encriptado en el campo password y un valor true en el campo passwordIsEncrypted indicando que la constraseña está encriptada.
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean) -> ("user", 'X' + "userPassword", false)
 f) Saída(s): excepción IncorrectPasswordException
-g) Inicialización: objeto de tipo UserProfile
+g) Inicialización: creación de objeto de tipo UserProfile
 
 43.
 a) Código: "PR-UN-043”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: loginWithNonExistentUser()
-d) Motivación:
-e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean)
+d) Motivación: logeo de un usuario que no existe (valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un valor no nulo o no vacío en el campo nombre, un valor encriptado en el campo password y un valor true en el campo passwordIsEncrypted indicando que la constraseña está encriptada.
+e) Entrada(s): loginName(String), password(String), passwordIsEncrypted(boolean) -> ("userNonExistent", "userPassword", false)
 f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: -
 
 44.
 a) Código: "PR-UN-044”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: findNonExistentUser()
-d) Motivación:
-e) Entrada(s): userProfileId(Long)
+d) Motivación: búsqueda de un usuario no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de usuario existente.
+e) Entrada(s): userProfileId(Long) ->  (-1)
 f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: -
 
@@ -408,45 +432,346 @@ g) Inicialización: -
 a) Código: "PR-UN-045”
 b) Unidade: ApuestasService
 c) Función/método: update()
-d) Motivación:
-e) Entrada(s): userProfileId(Long), userProfileDetails(UserProfileDetails)
+d) Motivación: actualización de un usuario con valores correctos. Se consideran valores correctos un código de usuario existente y un UserProfileDetails con todos sus campos no nulos ni vacíos.
+e) Entrada(s): userProfileId(Long), userProfileDetails(UserProfileDetails) -> (valor no libre, new UserProfileDetails('X' + "nombre", 'X' + "apellido", 'X' + "usuario@udc.es"))
 f) Saída(s): -
-g) Inicialización: objeto de tipo UserProfile
+g) Inicialización: creación de objeto de tipo UserProfile
 
 46.
 a) Código: "PR-UN-046”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: updateWithNonExistentUser()
-d) Motivación:
-e) Entrada(s): userProfileId(Long), userProfileDetails(UserProfileDetails)
+d) Motivación: actualización de un usuario no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un usuario existente y un UserProfileDetails con todos sus campos no nulos ni vacíos.
+e) Entrada(s): userProfileId(Long), userProfileDetails(UserProfileDetails) -> (-1,new UserProfileDetails("name", "lastName", "user@udc.es"))
 f) Saída(s): excepción InstanceNotFoundException
-g) Inicialización: -
+g) Inicialización: creación de objeto de tipo UserProfile
 
 47.
 a) Código: "PR-UN-047”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: changePassword()
-d) Motivación:
-e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String)
+d) Motivación: cambio de contraseña de un usuario con valores correctos. Se consideran valores correctos: un código de un usuario existente, un valor en el campo oldClearPassword que coincida con la contraseña actual de usuario y un valor no nulo y no vacío en el campo newClearPassword.
+e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String) -> (valor no libre, "userPassword", 'X' + "userPassword")
 f) Saída(s): -
-g) Inicialización: objeto de tipo UserProfile
+g) Inicialización: creación de objeto de tipo UserProfile
 
 48.
 a) Código: "PR-UN-048”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: changePasswordWithIncorrectPassword()
-d) Motivación:
-e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String)
+d) Motivación: cambio de contraseña de un usuario con una contraseña que no coincide con la actual (valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un usuario existente, un valor en el campo oldClearPassword que coincida con la contraseña actual de usuario y un valor no nulo y no vacío en el campo newClearPassword.
+e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String) -> (valor no libre, 'X' + "userPassword", 'Y' + "userPassword")
 f) Saída(s): -
-g) Inicialización: objeto de tipo UserProfile
+g) Inicialización: creación de objeto de tipo UserProfile
 
 49.
 a) Código: "PR-UN-049”
-b) Unidade: ApuestasService
+b) Unidade: UserService
 c) Función/método: changePasswordWithNonExistentUser()
-d) Motivación:
-e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String)
+d) Motivación: cambio de contraseña de un usuario no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un usuario existente, un valor en el campo oldClearPassword que coincida con la contraseña actual de usuario y un valor no nulo y no vacío en el campo newClearPassword.
+e) Entrada(s): userProfileId(Long), oldClearPassword(String), newClearPassword(String) -> (-1, "userPassword", "XuserPassword")
 f) Saída(s): -
 g) Inicialización: -
+
+50.
+a) Código: "PR-UN-050”
+b) Unidade: Apuesta
+c) Función/método: save()
+d) Motivación: almacenar una apuesta en base de datos con valores correctos. Se consideran valores correctos: una apuesta válida.
+e) Entrada(s): entity(E) -> (new Apuesta(opcion, 10, userProfile, fecha)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo Opcion Apuesta y UserProfile
+
+51.
+a) Código: "PR-UN-051”
+b) Unidade: Apuesta
+c) Función/método: find()
+d) Motivación: búsqueda de una apuesta en base de datos con valores correctos. Se consideran valores correctos: un código de una apuesta existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): objeto de tipo E
+g) Inicialización: creación de objeto de tipo Apuesta
+
+52.
+a) Código: "PR-UN-052”
+b) Unidade: Apuesta
+c) Función/método: findWithNoExistentId()
+d) Motivación: búsqueda en base de datos de una apuesta no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una apuesta existente.
+e) Entrada(s): id(PK) -> (-1)
+f) Saída(s): objeto de tipo E
+g) Inicialización: -
+
+53.
+a) Código: "PR-UN-053”
+b) Unidade: Apuesta
+c) Función/método: remove()
+d) Motivación: borrado en base de datos de una apuesta con valores correctos. Se consideran valores correctos: un código de una apuesta existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo Apuesta
+
+54.
+a) Código: "PR-UN-054”
+b) Unidade: Apuesta
+c) Función/método: removeWithNoExistentId()
+d) Motivación: borrado en base de datos de una apuesta no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una apuesta existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: -
+
+55.
+a) Código: "PR-UN-055”
+b) Unidade: Apuesta
+c) Función/método: findByUserId()
+d) Motivación: búsqueda en base de datos de las apuestas de un usuario con valores correctos. Se consideran valores correctos: un código de un usuario existente, el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): userId(Long), startIndex(int), count(int) -> (valor no libre, 0, 5)
+f) Saída(s): lista de apuestas
+g) Inicialización: creación de objetos de tipo Apuesta
+
+56.
+a) Código: "PR-UN-056”
+b) Unidade: Categoria
+c) Función/método: save()
+d) Motivación: almacenar una categoria en base de datos con valores correctos. Se consideran valores correctos: una categoria válida.
+e) Entrada(s): entity(E) -> new Categoria("categoria")
+f) Saída(s): -
+g) Inicialización: -
+
+57.
+a) Código: "PR-UN-057”
+b) Unidade: Categoria
+c) Función/método: find()
+d) Motivación: búsqueda de una categoria en base de datos con valores correctos. Se consideran valores correctos: un código de una categoria existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): objeto de tipo E
+g) Inicialización: creación de objeto de tipo Categoria
+
+58.
+a) Código: "PR-UN-058”
+b) Unidade: Categoria
+c) Función/método: findWithNoExistentId()
+d) Motivación: búsqueda en base de datos de una categoria no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una categoria existente.
+e) Entrada(s): id(PK) -> (-1)
+f) Saída(s): objeto de tipo E
+g) Inicialización: -
+
+59.
+a) Código: "PR-UN-059”
+b) Unidade: Categoria
+c) Función/método: remove()
+d) Motivación: borrado en base de datos de una categoria con valores correctos. Se consideran valores correctos: un código de una categoria existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo Categoria
+
+60.
+a) Código: "PR-UN-060”
+b) Unidade: Categoria
+c) Función/método: removeWithNoExistentId()
+d) Motivación: borrado en base de datos de una categoria no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una categoria existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: -
+
+61.
+a) Código: "PR-UN-061”
+b) Unidade: Categoria
+c) Función/método: findCategorias()
+d) Motivación: búsqueda de todas las categorías existentes en base de datos con valores correctos. No recibe parámetros.
+e) Entrada(s): -
+f) Saída(s): lista con todas las categorias existentes
+g) Inicialización: creación de objeto de tipo Categoria
+
+62.
+a) Código: "PR-UN-062”
+b) Unidade: Evento
+c) Función/método: save()
+d) Motivación: almacenar un evento en base de datos con valores correctos. Se consideran valores correctos: un evento válido.
+e) Entrada(s): entity(E) -> (new Evento("Barsa- Atletico", "24/12/2017", categoria))
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo Categoria
+
+63.
+a) Código: "PR-UN-063”
+b) Unidade: Evento
+c) Función/método: find()
+d) Motivación: búsqueda de un evento en base de datos con valores correctos. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): objeto de tipo E
+g) Inicialización: creación de objeto de tipo Evento
+
+64.
+a) Código: "PR-UN-064”
+b) Unidade: Evento
+c) Función/método: findWithNoExistentId()
+d) Motivación: búsqueda en base de datos de un evento no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): id(PK) -> (-1)
+f) Saída(s): objeto de tipo E
+g) Inicialización: -
+
+65.
+a) Código: "PR-UN-065”
+b) Unidade: Evento
+c) Función/método: remove()
+d) Motivación: borrado en base de datos de un evento con valores correctos. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo Evento
+
+66.
+a) Código: "PR-UN-066”
+b) Unidade: Evento
+c) Función/método: removeWithNoExistentId()
+d) Motivación: borrado en base de datos de un evento no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: -
+
+67.
+a) Código: "PR-UN-067”
+b) Unidade: Evento
+c) Función/método: findEventosAbiertos()
+d) Motivación: búsqueda en base de datos de los eventos que están abiertos con valores correctos. Se consideran valores correctos un valor no nulo y no vacío para el campo nombre, un código de una categoria existente, un valor boolean en el campo admin true o false indicando si el que realiza la búsqueda es un usuario administrador o no, el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> ("barsa", valor no libre, false, 0, 5)
+f) Saída(s): lista de eventos
+g) Inicialización: creación de objeto de tipo Categoria
+
+68.
+a) Código: "PR-UN-068”
+b) Unidade: OpcionApuesta
+c) Función/método: save()
+d) Motivación: almacenar una opcion de apuesta en base de datos con valores correctos. Se consideran valores correctos: una opcion de apuesta válida.
+e) Entrada(s): entity(E) -> (new OpcionApuesta("X", 1.70, null, tipoApuesta))
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo TipoApuesta
+
+69.
+a) Código: "PR-UN-069”
+b) Unidade: OpcionApuesta
+c) Función/método: find()
+d) Motivación: búsqueda de un evento en base de datos con valores correctos. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): objeto de tipo E
+g) Inicialización: creación de objeto de tipo OpcionApuesta
+
+70.
+a) Código: "PR-UN-070”
+b) Unidade: OpcionApuesta
+c) Función/método: findWithNoExistentId()
+d) Motivación: búsqueda en base de datos de una opcion de apuesta no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una opcion de apuesta existente.
+e) Entrada(s): id(PK) -> (-1)
+f) Saída(s): objeto de tipo E
+g) Inicialización: -
+
+71.
+a) Código: "PR-UN-071”
+b) Unidade: OpcionApuesta
+c) Función/método: remove()
+d) Motivación: borrado en base de datos de una opcion de apuesta con valores correctos. Se consideran valores correctos: un código de una opcion de apuesta existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo OpcionApuesta
+
+72.
+a) Código: "PR-UN-072”
+b) Unidade: OpcionApuesta
+c) Función/método: removeWithNoExistentId()
+d) Motivación: borrado en base de datos de una opcion de apuesta no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una opcion de apuesta existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: -
+
+73.
+a) Código: "PR-UN-073”
+b) Unidade: OpcionApuesta
+c) Función/método: validarOpciones()
+d) Motivación: validación de opciones ganadoras en base de datos con valores correctos. Se consideran valores correctos: una lista con códigos de opciones de apuesta existentes.
+e) Entrada(s): (opciones(List<Long>)) -> (ganadoras)
+*ganadoras -> List<Long> ganadoras=new ArrayList<Long>()
+	      ganadoras.add(valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objetos de tipo OpcionApuesta
+
+74.
+a) Código: "PR-UN-074”
+b) Unidade: OpcionApuesta
+c) Función/método: invalidarOpciones()
+d) Motivación: 
+e) Entrada(s): codTipoApuesta(Long) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo TipoApuesta
+
+75.
+a) Código: "PR-UN-075”
+b) Unidade: OpcionApuesta
+c) Función/método: getOpcionesApuesta()
+d) Motivación: búsqueda de todas las opciones de apuesta de un tipo de apuesta existentes en base de datos con valores correctos. Se consideran valores correctos: un código de tipo de apuesta existente.
+e) Entrada(s): codTipoApuesta(Long) -> (valor no libre)
+f) Saída(s): lista de opciones de apuesta
+g) Inicialización: creación de objetos de tipo TipoApuesta
+
+76.
+a) Código: "PR-UN-076”
+b) Unidade: OpcionApuesta
+c) Función/método: isOpcionesValidated()
+d) Motivación: comprobación en base de datos de si las opciones de apuesta de un tipo de apuesta ya han sido validadas. Se consideran valores correctos: un código de tipo de apuesta existente.
+e) Entrada(s): codTipoApuesta(Long) -> (valor no libre)
+f) Saída(s): boolean
+g) Inicialización: creación de objeto de tipo TipoApuesta
+
+77.
+a) Código: "PR-UN-077”
+b) Unidade: TipoApuesta
+c) Función/método: save()
+d) Motivación: almacenar un tipo de apuesta en base de datos con valores correctos. Se consideran valores correctos: un tipo de apuesta válido.
+e) Entrada(s): entity(E) -> (new TipoApuesta("Goleador", false, evento))
+f) Saída(s): -
+g) Inicialización: -
+
+78.
+a) Código: "PR-UN-078”
+b) Unidade: TipoApuesta
+c) Función/método: find()
+d) Motivación: búsqueda de un tipo de apuesta en base de datos con valores correctos. Se consideran valores correctos: un código de un tipo de apuesta existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): objeto de tipo E
+g) Inicialización: creación de objeto de tipo TipoApuesta
+
+79.
+a) Código: "PR-UN-079”
+b) Unidade: TipoApuesta
+c) Función/método: findWithNoExistentId()
+d) Motivación: búsqueda en base de datos de un tipo de apuesta no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un tipo de apuesta existente.
+e) Entrada(s): id(PK) -> (-1)
+f) Saída(s): objeto de tipo E
+g) Inicialización: -
+
+80.
+a) Código: "PR-UN-080”
+b) Unidade: TipoApuesta
+c) Función/método: remove()
+d) Motivación: borrado en base de datos de un tipo de apuesta con valores correctos. Se consideran valores correctos: un código de un tipo de apuesta existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo TipoApuesta
+
+81.
+a) Código: "PR-UN-081”
+b) Unidade: TipoApuesta
+c) Función/método: removeWithNoExistentId()
+d) Motivación: borrado en base de datos de una categoria no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una categoria existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: -
+
+82.
+a) Código: "PR-UN-082”
+b) Unidade: TipoApuesta
+c) Función/método: findTipoApuesta()
+d) Motivación: búsqueda de todos los tipos de apuesta de un evento existentes en base de datos con valores correctos. Se consideran valores correctos: un código de un evento existente.
+e) Entrada(s): codEvento(Long) -> (valor no libre)
+f) Saída(s): lista con tipos de apuesta
+g) Inicialización: creación de objetos de tipo TipoApuesta y Evento.
+
+
 
 
