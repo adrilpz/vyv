@@ -758,7 +758,7 @@ g) Inicialización: creación de objeto de tipo TipoApuesta
 a) Código: "PR-UN-081”
 b) Unidade: TipoApuesta
 c) Función/método: removeWithNoExistentId()
-d) Motivación: borrado en base de datos de una categoria no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de una categoria existente.
+d) Motivación: borrado en base de datos de un tipo de apuesta no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un tipo de apuesta existente.
 e) Entrada(s): id(PK) -> (valor no libre)
 f) Saída(s): -
 g) Inicialización: -
@@ -772,6 +772,66 @@ e) Entrada(s): codEvento(Long) -> (valor no libre)
 f) Saída(s): lista con tipos de apuesta
 g) Inicialización: creación de objetos de tipo TipoApuesta y Evento.
 
+83.
+a) Código: "PR-UN-083”
+b) Unidade: UserProfile
+c) Función/método: save()
+d) Motivación: almacenar un perfil de usuario en base de datos con valores correctos. Se consideran valores correctos: un perfil de usuario válido.
+e) Entrada(s): entity(E) -> (new UserProfile("user3", "userPassword3", "name3", "lastName3", "user3@udc.es"))
+f) Saída(s): -
+g) Inicialización: -
 
+84.
+a) Código: "PR-UN-084”
+b) Unidade: UserProfile
+c) Función/método: find()
+d) Motivación: búsqueda de un perfil de usuario en base de datos con valores correctos. Se consideran valores correctos: un código de un perfil de usuario existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): objeto de tipo E
+g) Inicialización: creación de objeto de tipo UserProfile
 
+85.
+a) Código: "PR-UN-085”
+b) Unidade: UserProfile
+c) Función/método: findWithNoExistentId()
+d) Motivación: búsqueda en base de datos de un perfil de usuario no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de un perfil de usuario existente.
+e) Entrada(s): id(PK) -> (-1)
+f) Saída(s): objeto de tipo E
+g) Inicialización: -
+
+86.
+a) Código: "PR-UN-086”
+b) Unidade: UserProfile
+c) Función/método: remove()
+d) Motivación: borrado en base de datos de un perfil de usuario con valores correctos. Se consideran valores correctos: un código de un perfil de usuario existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo UserProfile
+
+87.
+a) Código: "PR-UN-087”
+b) Unidade: UserProfile
+c) Función/método: removeWithNoExistentId()
+d) Motivación: borrado en base de datos de un perfil de usuario no existente (los códigos, que son autogenerados, comienzan en 1 y siguen de forma incremental por lo que el código -1 no es un valor correcto; valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un código de perfil de usuario existente.
+e) Entrada(s): id(PK) -> (valor no libre)
+f) Saída(s): -
+g) Inicialización: -
+
+88.
+a) Código: "PR-UN-088”
+b) Unidade: UserProfile
+c) Función/método: findByUserLogin()
+d) Motivación: búsqueda en base de datos de un perfil de usuario por su login con valores correctos. Se consideran valores correctos: un valor no nulo, no vacío y existente en el campo loginName.
+e) Entrada(s): loginName(String) -> ("user")
+f) Saída(s): -
+g) Inicialización: creación de objeto de tipo UserProfile
+
+89.
+a) Código: "PR-UN-089”
+b) Unidade: UserProfile
+c) Función/método: findByUserLoginWithNoExistentLogin()
+d) Motivación: búsqueda en base de datos de un perfil de usuario por un login que no existe (valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un valor no nulo, no vacío y existente en el campo loginName.
+e) Entrada(s): loginName(String) -> ("")
+f) Saída(s): objeto de tipo UserProfile
+g) Inicialización: creación de objeto de tipo UserProfile
 
