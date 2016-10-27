@@ -35,7 +35,7 @@ public class Layout {
     
    public boolean getAdminSession() {
     	
-    	if (userSession.isAdmin()) {
+    	if (userSession!=null && userSession.isAdmin()) {
     		return true;
     	} else {
     		return adminSession;

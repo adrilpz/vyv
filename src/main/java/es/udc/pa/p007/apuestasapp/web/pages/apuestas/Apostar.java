@@ -126,7 +126,7 @@ public class Apostar {
 	void onActivate(Long codOpcion) {
 		if (userSession.getCodOpcion() == null)
 			userSession.setCodOpcion(codOpcion);
-		else if (userSession.getCodOpcion() != codOpcion) {
+		else if (userSession.getCodOpcion().equals(codOpcion)) {
 			userSession.setCodOpcion(codOpcion);
 		}
 	}

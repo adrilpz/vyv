@@ -128,7 +128,6 @@ public class UserServiceTest {
     }
 
     //PR-UN-045
-    //Quitar llamada al service para register y find
     @Test
     public void testUpdate() throws InstanceNotFoundException,
             IncorrectPasswordException, DuplicateInstanceException {

@@ -98,16 +98,16 @@ public class BuscarEventos {
 		if (userSession != null)
 			admin = userSession.isAdmin();
 		
-		List<Evento> eventos= new ArrayList<Evento>();
+		List<Evento> foundEventos= new ArrayList<Evento>();
 		try {
-			eventos= apuestasService.findEventos(partial ,null, admin, 0, 10).getEventos();
+			foundEventos= apuestasService.findEventos(partial ,null, admin, 0, 10).getEventos();
 		} catch (InstanceNotFoundException e) {
 			return new ArrayList<String>();
 		}
 		
 		List<String> results = new ArrayList<String>();
 		
-		for (Evento e: eventos){
+		for (Evento e: foundEventos){
 			results.add(e.getNombre());
 		}
 		

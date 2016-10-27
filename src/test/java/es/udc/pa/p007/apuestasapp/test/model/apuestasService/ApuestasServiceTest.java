@@ -87,7 +87,7 @@ public class ApuestasServiceTest {
 	public void initialize() throws DuplicateInstanceException, InstanceNotFoundException, InputValidationException{
 		//Creación de fechas
 		fecha = Calendar.getInstance();
-		fecha.set(2017, 12, 24);
+		fecha.set(2017, 11, 24);
 		
 		fecha2 = Calendar.getInstance();
 		fecha2.set(2015, 11, 24);

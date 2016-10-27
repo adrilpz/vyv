@@ -126,13 +126,15 @@ public class CreateTipoApuesta {
 		
 		NumberFormat numberFormatter = NumberFormat.getInstance(locale);
 		ParsePosition position = new ParsePosition(0);
-		Number number = numberFormatter.parse(cuota, position);
-
-		if (position.getIndex() != cuota.length()) {
-			CreateOpcionesForm.recordError(cuotaTextField,
+		if (cuota!=null){
+			Number number = numberFormatter.parse(cuota, position);
+		
+			if (position.getIndex() != cuota.length()) {
+				CreateOpcionesForm.recordError(cuotaTextField,
 					messages.format("error-incorrectNumberFormat", cuota));
-		} else {
-			cuotaAsDouble = number.doubleValue();
+			} else {
+				cuotaAsDouble = number.doubleValue();
+			}
 		}
 
 	}
@@ -201,7 +203,7 @@ public class CreateTipoApuesta {
 
 		if (userSession.getCodEvento() == null)
 			userSession.setCodEvento(codEvento);
-		else if (userSession.getCodEvento() != codEvento) {
+		else if (userSession.getCodEvento().equals(codEvento)) {
 			userSession.setOpciones(null);
 			userSession.setOpciones(new ArrayList<OpcionApuesta>());
 			userSession.setCodEvento(codEvento);

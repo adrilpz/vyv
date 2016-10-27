@@ -71,7 +71,7 @@ public class ApuestaDaoTest {
 	public void initialize() {
 		//Creación de fechas
 		fecha = Calendar.getInstance();
-		fecha.set(2017, 12, 24);
+		fecha.set(2017, 11, 24);
 		
 		//Creación de categorías
 		futbol = new Categoria("Fútbol");
