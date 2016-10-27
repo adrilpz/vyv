@@ -13,7 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfile;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfileDao;
 import es.udc.pa.p007.apuestasapp.model.userservice.IncorrectPasswordException;

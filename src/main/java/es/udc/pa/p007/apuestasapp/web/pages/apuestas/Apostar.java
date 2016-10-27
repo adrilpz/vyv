@@ -1,7 +1,7 @@
 package es.udc.pa.p007.apuestasapp.web.pages.apuestas;
 
-import java.text.NumberFormat;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.Locale;
 
@@ -14,20 +14,17 @@ import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import es.udc.pa.p007.apuestasapp.model.apuesta.Apuesta;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.ApuestasService;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.InputValidationException;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.StartedEventException;
+import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicy;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicyType;
 import es.udc.pa.p007.apuestasapp.web.util.UserSession;
-import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
 public class Apostar {
-
-	private OpcionApuesta opcion;
 	
 	@Property
 	@SessionState(create = false)
@@ -101,10 +98,10 @@ public class Apostar {
 			cantidadAsDouble = number.doubleValue();
 		}
 
-		Apuesta apuesta = new Apuesta();
+		
 
 		try {
-			apuesta = apuestasService.createApuesta(userSession.getCodOpcion(),
+			 apuestasService.createApuesta(userSession.getCodOpcion(),
 					cantidadAsDouble, userSession.getUserProfileId());
 		} catch (StartedEventException e) {
 			ApostarForm.recordError(messages.format("error-eventStarted"));

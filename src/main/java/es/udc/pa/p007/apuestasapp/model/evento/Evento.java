@@ -1,7 +1,6 @@
 package es.udc.pa.p007.apuestasapp.model.evento;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,13 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
-import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 
 @Entity
 @org.hibernate.annotations.BatchSize(size = 10)

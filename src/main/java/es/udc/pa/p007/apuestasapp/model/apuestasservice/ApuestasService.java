@@ -2,7 +2,6 @@ package es.udc.pa.p007.apuestasapp.model.apuestasservice;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 import es.udc.pa.p007.apuestasapp.model.apuesta.Apuesta;
 import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;

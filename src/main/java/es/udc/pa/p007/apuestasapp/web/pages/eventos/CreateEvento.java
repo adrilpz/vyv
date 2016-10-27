@@ -21,7 +21,6 @@ import org.apache.tapestry5.services.SelectModelFactory;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.ApuestasService;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.InputValidationException;
 import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
-import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicy;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicyType;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
@@ -115,11 +114,9 @@ public class CreateEvento {
 		if (fechaEventoAsDate!=null){
 			Calendar fecha = Calendar.getInstance();
 			fecha.setTime(this.fechaEventoAsDate);
-
-			Evento evento = new Evento();
 	
 			try {
-				evento = apuestasService.createEvento(nombre, fecha,
+				apuestasService.createEvento(nombre, fecha,
 						selectedCategoriaId);
 			} catch (InstanceNotFoundException e) {
 				createEventoForm.recordError(messages.format(

@@ -1,20 +1,15 @@
 package es.udc.pa.p007.apuestasapp.web.pages.apuestas;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import org.apache.tapestry5.OptionModel;
-import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
-import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.internal.OptionModelImpl;
 import org.apache.tapestry5.internal.SelectModelImpl;
@@ -25,12 +20,10 @@ import org.apache.tapestry5.services.SelectModelFactory;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.ApuestasService;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.NotStartedEventException;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.ValidateOptionsException;
-import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicy;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicyType;
-import es.udc.pa.p007.apuestasapp.web.util.UserSession;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.ADMIN_USERS)

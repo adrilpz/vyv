@@ -17,17 +17,16 @@ import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pa.p007.apuestasapp.web.pages.user.Login;
-import es.udc.pa.p007.apuestasapp.web.util.UserSession;
-import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicy;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicyType;
+import es.udc.pa.p007.apuestasapp.web.util.UserSession;
+import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.ALL_USERS)
 public class DetallesEvento {
 
 	private Long codEvento;
 	private Evento evento;
-	private boolean eventoAnterior;
 
 	@Property
 	@SessionState(create = false)
@@ -43,10 +42,6 @@ public class DetallesEvento {
 
 	@Property
 	private OpcionApuesta opcion = new OpcionApuesta();
-
-	private boolean opcionGanadora;
-	private boolean opcionPerdedora;
-	private boolean opcionesMarcadas;
 
 	@Inject
 	private ApuestasService apuestasService;

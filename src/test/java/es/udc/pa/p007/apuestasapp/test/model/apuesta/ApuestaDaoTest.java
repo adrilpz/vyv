@@ -2,12 +2,12 @@ package es.udc.pa.p007.apuestasapp.test.model.apuesta;
 
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.pa.p007.apuestasapp.model.apuesta.Apuesta;
 import es.udc.pa.p007.apuestasapp.model.apuesta.ApuestaDao;
-import es.udc.pa.p007.apuestasapp.model.apuestasservice.ApuestasService;
-import es.udc.pa.p007.apuestasapp.model.apuestasservice.InputValidationException;
 import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
 import es.udc.pa.p007.apuestasapp.model.categoria.CategoriaDao;
 import es.udc.pa.p007.apuestasapp.model.evento.Evento;
@@ -30,7 +28,6 @@ import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuestaDao;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfile;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfileDao;
-import es.udc.pojo.modelutil.exceptions.DuplicateInstanceException;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @RunWith(SpringJUnit4ClassRunner.class)

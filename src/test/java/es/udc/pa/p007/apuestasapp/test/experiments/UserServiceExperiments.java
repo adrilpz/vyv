@@ -18,6 +18,7 @@ public class UserServiceExperiments {
 	public static void main(String[] args) {
 
 		/* Get service object. */
+		@SuppressWarnings("resource")
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				new String[] { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE });
 		UserService userService = ctx.getBean(UserService.class);

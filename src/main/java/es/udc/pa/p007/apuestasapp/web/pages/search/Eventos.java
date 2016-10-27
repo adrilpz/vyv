@@ -1,5 +1,10 @@
 package es.udc.pa.p007.apuestasapp.web.pages.search;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -7,16 +12,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.ApuestasService;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.EventoBlock;
 import es.udc.pa.p007.apuestasapp.model.evento.Evento;
-import es.udc.pa.p007.apuestasapp.web.util.UserSession;
-import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
-
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicy;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicyType;
+import es.udc.pa.p007.apuestasapp.web.util.UserSession;
+import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.ALL_USERS)
 public class Eventos {
@@ -28,7 +27,6 @@ public class Eventos {
 	private int startIndex = 0;
 	private EventoBlock eventoBlock;
 	private Evento evento;
-	private boolean eventoPosterior;
 
 	@Property
 	@SessionState(create = false)

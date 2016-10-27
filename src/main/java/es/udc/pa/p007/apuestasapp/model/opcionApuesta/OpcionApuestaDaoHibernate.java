@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pojo.modelutil.dao.GenericDaoHibernate;
 
 @Repository("opcionApuestaDao")

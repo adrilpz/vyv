@@ -1,27 +1,24 @@
 package es.udc.pa.p007.apuestasapp.web.pages.apuestas;
 
+import java.text.DateFormat;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.corelib.components.Submit;
 import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.ApuestasService;
 import es.udc.pa.p007.apuestasapp.model.apuestasservice.InputValidationException;
@@ -29,18 +26,16 @@ import es.udc.pa.p007.apuestasapp.model.apuestasservice.StartedEventException;
 import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
-import es.udc.pa.p007.apuestasapp.web.util.UserSession;
-import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicy;
 import es.udc.pa.p007.apuestasapp.web.services.AuthenticationPolicyType;
+import es.udc.pa.p007.apuestasapp.web.util.UserSession;
+import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.ADMIN_USERS)
 public class CreateTipoApuesta {
 	
 	@Property
 	Long codEvento;
-
-	private Evento evento;
 
 	private boolean mul;
 

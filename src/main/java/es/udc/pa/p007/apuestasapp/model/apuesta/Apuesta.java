@@ -14,9 +14,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Immutable;
+
 import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfile;
-import org.hibernate.annotations.Immutable;
 
 @Entity
 @org.hibernate.annotations.BatchSize(size = 10)

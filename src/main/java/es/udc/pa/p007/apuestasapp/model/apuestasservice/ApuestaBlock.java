@@ -1,8 +1,8 @@
 package es.udc.pa.p007.apuestasapp.model.apuestasservice;
 
-import es.udc.pa.p007.apuestasapp.model.apuesta.Apuesta;
-
 import java.util.List;
+
+import es.udc.pa.p007.apuestasapp.model.apuesta.Apuesta;
 
 
 public class ApuestaBlock {
