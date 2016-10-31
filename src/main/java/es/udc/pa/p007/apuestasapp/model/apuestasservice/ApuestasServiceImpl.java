@@ -175,7 +175,7 @@ public class ApuestasServiceImpl implements ApuestasService {
 		OpcionApuesta opcion;
 		for (Long cod : opcionesGanadoras) {
 			opcion = opcionApuestaDao.find(cod);
-			if (opcion.getTipoApuesta().getCodTipoApuesta().equals(codTipoApuesta))
+			if (!opcion.getTipoApuesta().getCodTipoApuesta().equals(codTipoApuesta))
 				throw new ValidateOptionsException(
 						"No todas las opciones ganadoras se corresponden con el tipo de apuesta");
 		}
