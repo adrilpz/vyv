@@ -406,6 +406,21 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            
+             <!-- PITest -->
+            <plugin>
+			    <groupId>org.pitest</groupId>
+			    <artifactId>pitest-maven</artifactId>
+			    <version>0.32</version>
+			    <configuration>
+			        <targetClasses>
+			            <param>es.udc.pa.p007.apuestasapp.model*</param>
+			        </targetClasses>
+			        <targetTests>
+			            <param>es.udc.pa.p007.apuestasapp.test*</param>
+			        </targetTests>
+			    </configuration>
+			</plugin>
 
         </plugins>
 
