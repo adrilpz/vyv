@@ -414,10 +414,10 @@
 			    <version>1.1.10</version>
 			    <configuration>
 			        <targetClasses>
-			            <param>es.udc.pa.p007.apuestasapp.model.categoria.CategoriaDao</param>
+			            <param>es.udc.pa.p007.apuestasapp.model*</param>
 			        </targetClasses>
 			        <targetTests>
-			            <param>es.udc.pa.p007.apuestasapp.test.categoria.CategoriaDaoTest</param>
+			            <param>es.udc.pa.p007.apuestasapp.test*</param>
 			        </targetTests>
 			    </configuration>
 			</plugin>
