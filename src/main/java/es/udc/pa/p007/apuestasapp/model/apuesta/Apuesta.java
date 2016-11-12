@@ -104,12 +104,4 @@ public class Apuesta {
 		this.fechaApuesta = fechaApuesta;
 	}
 
-	@Override
-	public String toString() {
-		return "Apuesta [opcion=" + opcion.getResultado() + ", cantidad="
-				+ cantidad + ", codApuesta=" + codApuesta + ", usuario="
-				+ usuario.getEmail() + ", fechaApuesta="
-				+ fechaApuesta.getTime() + "]";
-	}
-
 }

@@ -40,11 +40,6 @@ public class Categoria {
 
 	public void setCodCategoria(Long codCategoria) {
 		this.codCategoria = codCategoria;
-	};
-	
-	@Override
-	public String toString() {
-	    return String.valueOf(this.getCodCategoria()); 
 	}
 	
 }
