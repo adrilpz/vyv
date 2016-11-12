@@ -1,9 +1,11 @@
-package es.udc.pa.p007.apuestasapp.test.userprofile;
+package es.udc.pa.p007.apuestasapp.test.model.categoria;
 
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,104 +15,97 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfile;
-import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfileDao;
+import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
+import es.udc.pa.p007.apuestasapp.model.categoria.CategoriaDao;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE })
 @Transactional
-public class UserProfileDaoTest {
+public class CategoriaDaoTest {
 	
 	private final long NON_EXISTENT_COD = -1;
 
 	@Autowired
-	private UserProfileDao userProfileDao;
+	private CategoriaDao categoriaDao;
 	
 	//VARIABLES GLOBALES
-	private UserProfile userProfile, userProfile2;
+	private Categoria futbol, baloncesto;
 	
 	@Before
-	public void initialize() {		
-		//Creación usuarios
-		userProfile = new UserProfile("user", "userPassword", "name", "lastName", "user@udc.es");
-		userProfileDao.save(userProfile);
+	public void initialize() {
 		
-		userProfile2 = new UserProfile("user2", "userPassword2", "name2", "lastName2", "user2@udc.es");
-		userProfileDao.save(userProfile2);
+		//Creación de categorías
+		futbol = new Categoria("Fútbol");
+		categoriaDao.save(futbol);
 		
+		baloncesto = new Categoria("Baloncesto");
+		categoriaDao.save(baloncesto);		
 	}
 	
-	//PR-UN-083
+	//PR-UN-056
 	@Test
 	public void testSave() throws InstanceNotFoundException{
 		//Setup
-		UserProfile userPR083 = new UserProfile("user3", "userPassword3", "name3", "lastName3", "user3@udc.es");
+		Categoria categoriaPR056 = new Categoria("categoria");
 		
 		//Llamada
-		userProfileDao.save(userPR083);
+		categoriaDao.save(categoriaPR056);
 		
 		//Aserción
-		UserProfile foundUser=userProfileDao.find(userPR083.getUserProfileId());
-		assertEquals(userPR083, foundUser);
+		Categoria foundCategoria= categoriaDao.find(categoriaPR056.getCodCategoria());
+		assertEquals(categoriaPR056, foundCategoria);
 	}
 	
-	//PR-UN-084
+	//PR-UN-057
 	@Test
 	public void testFind() throws InstanceNotFoundException{
 		//Llamada
-		UserProfile foundUser=userProfileDao.find(userProfile.getUserProfileId());
+		Categoria foundCategoria= categoriaDao.find(futbol.getCodCategoria());
 		
 		//Aserción
-		assertEquals(userProfile, foundUser);
+		assertEquals(futbol, foundCategoria);
 	}
 	
-	//PR-UN-085
+	//PR-UN-058
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
 		//Llamada
-		userProfileDao.find(NON_EXISTENT_COD);
+		categoriaDao.find(NON_EXISTENT_COD);
 	}
 	
-	//PR-UN-086
+	//PR-UN-059
 	@Test
 	public void testRemove() throws InstanceNotFoundException{
 		//Setup
 		boolean exceptionCached=false;
 
 		//Llamada
-		userProfileDao.remove(userProfile.getUserProfileId());
-				
+		categoriaDao.remove(futbol.getCodCategoria());
+		
 		//Aserción
 		try {
-			userProfileDao.find(userProfile.getUserProfileId());
+			categoriaDao.find(futbol.getCodCategoria());
 		} catch (InstanceNotFoundException e) {
 			exceptionCached=true;
 		}
 		assertTrue(exceptionCached);
 	}
 	
-	//PR-UN-087
+	//PR-UN-060
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
 		//Llamada
-		userProfileDao.remove(NON_EXISTENT_COD);
+		categoriaDao.remove(NON_EXISTENT_COD);
 	}
 	
-	//PR-UN-088
+	//PR-UN-061
 	@Test
-	public void testFindByUserLogin() throws InstanceNotFoundException{
+	public void testFindCategorias(){
 		//Llamada
-		UserProfile foundUser=userProfileDao.findByLoginName(userProfile.getLoginName());
+		List<Categoria> foundCategorias=categoriaDao.findCategorias();
 		
 		//Aserción
-		assertEquals(userProfile, foundUser);
-	}
-	
-	//PR-UN-089
-	@Test(expected=InstanceNotFoundException.class)
-	public void testFindByUserLoginWithNoExistentLogin() throws InstanceNotFoundException{
-		//Llamada
-		userProfileDao.findByLoginName("");
+		assertEquals(foundCategorias.size(), 2);
 	}
 }

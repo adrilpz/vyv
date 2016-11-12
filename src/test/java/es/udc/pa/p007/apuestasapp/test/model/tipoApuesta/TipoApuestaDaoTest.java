@@ -1,10 +1,11 @@
-package es.udc.pa.p007.apuestasapp.test.categoria;
+package es.udc.pa.p007.apuestasapp.test.model.tipoApuesta;
 
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Before;
@@ -17,95 +18,120 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
 import es.udc.pa.p007.apuestasapp.model.categoria.CategoriaDao;
+import es.udc.pa.p007.apuestasapp.model.evento.Evento;
+import es.udc.pa.p007.apuestasapp.model.evento.EventoDao;
+import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
+import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuestaDao;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE })
 @Transactional
-public class CategoriaDaoTest {
+public class TipoApuestaDaoTest {
 	
 	private final long NON_EXISTENT_COD = -1;
 
 	@Autowired
 	private CategoriaDao categoriaDao;
+
+	@Autowired
+	private EventoDao eventoDao;
+
+	@Autowired
+	private TipoApuestaDao tipoApuestaDao;
 	
 	//VARIABLES GLOBALES
-	private Categoria futbol, baloncesto;
+	private Categoria futbol;
+	private Evento evento;
+	private Calendar fecha;
+	private TipoApuesta tipoApuesta, tipoApuesta2;
 	
 	@Before
 	public void initialize() {
+		//Creación de fechas
+		fecha = Calendar.getInstance();
+		fecha.set(2017, 11, 24);
 		
 		//Creación de categorías
 		futbol = new Categoria("Fútbol");
 		categoriaDao.save(futbol);
 		
-		baloncesto = new Categoria("Baloncesto");
-		categoriaDao.save(baloncesto);		
+		//Creación de eventos
+		evento = new Evento("Barsa - Madrid", fecha, futbol);
+		eventoDao.save(evento);
+		
+		//Creación tipos de apuesta
+		tipoApuesta = new TipoApuesta("Resultado", false, evento);
+		tipoApuestaDao.save(tipoApuesta);
+		
+		tipoApuesta2 = new TipoApuesta("Goles", false, evento);
+		tipoApuestaDao.save(tipoApuesta2); 
+
 	}
 	
-	//PR-UN-056
+	//PR-UN-077
 	@Test
 	public void testSave() throws InstanceNotFoundException{
 		//Setup
-		Categoria categoriaPR056 = new Categoria("categoria");
+		TipoApuesta tipoApuestaPR077 = new TipoApuesta("Goleador", false, evento);
 		
 		//Llamada
-		categoriaDao.save(categoriaPR056);
+		tipoApuestaDao.save(tipoApuestaPR077);
 		
 		//Aserción
-		Categoria foundCategoria= categoriaDao.find(categoriaPR056.getCodCategoria());
-		assertEquals(categoriaPR056, foundCategoria);
+		TipoApuesta foundTipoApuesta=tipoApuestaDao.find(tipoApuestaPR077.getCodTipoApuesta());
+		assertEquals(tipoApuestaPR077, foundTipoApuesta);
 	}
 	
-	//PR-UN-057
+	//PR-UN-078
 	@Test
 	public void testFind() throws InstanceNotFoundException{
 		//Llamada
-		Categoria foundCategoria= categoriaDao.find(futbol.getCodCategoria());
+		TipoApuesta foundTipoApuesta=tipoApuestaDao.find(tipoApuesta.getCodTipoApuesta());
 		
 		//Aserción
-		assertEquals(futbol, foundCategoria);
+		assertEquals(tipoApuesta, foundTipoApuesta);
 	}
 	
-	//PR-UN-058
+	//PR-UN-079
 	@Test(expected=InstanceNotFoundException.class)
 	public void testFindWithNoExistentId() throws InstanceNotFoundException{
 		//Llamada
-		categoriaDao.find(NON_EXISTENT_COD);
+		tipoApuestaDao.find(NON_EXISTENT_COD);
 	}
 	
-	//PR-UN-059
+	//PR-UN-080
 	@Test
 	public void testRemove() throws InstanceNotFoundException{
 		//Setup
 		boolean exceptionCached=false;
 
 		//Llamada
-		categoriaDao.remove(futbol.getCodCategoria());
-		
+		tipoApuestaDao.remove(tipoApuesta.getCodTipoApuesta());
+			
 		//Aserción
 		try {
-			categoriaDao.find(futbol.getCodCategoria());
+			tipoApuestaDao.find(tipoApuesta.getCodTipoApuesta());
 		} catch (InstanceNotFoundException e) {
 			exceptionCached=true;
 		}
 		assertTrue(exceptionCached);
 	}
 	
-	//PR-UN-060
+	//PR-UN-081
 	@Test(expected=InstanceNotFoundException.class)
 	public void testRemoveWithNoExistentId() throws InstanceNotFoundException{
 		//Llamada
-		categoriaDao.remove(NON_EXISTENT_COD);
+		tipoApuestaDao.remove(NON_EXISTENT_COD);
 	}
 	
-	//PR-UN-061
+	//PR-UN-082
 	@Test
-	public void testFindCategorias(){
+	public void testFindTiposApuesta(){
 		//Llamada
-		List<Categoria> foundCategorias=categoriaDao.findCategorias();
+		List<TipoApuesta> foundTiposApuesta=tipoApuestaDao.getTiposApuesta(evento.getCodEvento());
 		
 		//Aserción
-		assertEquals(foundCategorias.size(), 2);
+		assertEquals(foundTiposApuesta.size(), 2);
 	}
 }

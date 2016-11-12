@@ -1,4 +1,4 @@
-package es.udc.pa.p007.apuestasapp.test.evento;
+package es.udc.pa.p007.apuestasapp.test.model.evento;
 
 import static es.udc.pa.p007.apuestasapp.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.pa.p007.apuestasapp.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
