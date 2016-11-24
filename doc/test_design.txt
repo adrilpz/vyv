@@ -832,6 +832,53 @@ b) Unidade: UserProfile
 c) Función/método: findByUserLoginWithNoExistentLogin()
 d) Motivación: búsqueda en base de datos de un perfil de usuario por un login que no existe (valor frontera) con el objetivo de que salte una excepción. Se consideran valores correctos: un valor no nulo, no vacío y existente en el campo loginName.
 e) Entrada(s): loginName(String) -> ("")
-f) Saída(s): objeto de tipo UserProfile
+f) Saída(s): excepción InstanceNotFoundException
 g) Inicialización: creación de objeto de tipo UserProfile
 
+90.
+a) Código: "PR-IN-090"
+b) Unidade: ApuestaService
+c) Función/método: findEventosWithoutAdmin
+d) Motivación: búsqueda de eventos de un usuario no administrador con valores correctos. Se consideran valores correctos: un valor no vacío o no nulo en el campo nombre, un código de categoría existente, el campo admin con valor false (que indica que el que realiza la búsqueda no es un usuario administrador), el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> ("madrid", valor no libre, false, 0, 5);
+f) Saída(s): objeto de tipo EventoBlock
+g) Inicialización: objeto de tipo Categoria
+
+91.
+a) Código: "PR-IN-091"
+b) Unidade: ApuestaService
+c) Función/método: findEventosWithAdmin()
+d) Motivación: búsqueda de eventos de un usuario no administrador con valores correctos. Se consideran valores correctos: un valor no vacío o no nulo en el campo nombre, un código de categoría existente, el campo admin con valor true (que indica que el que realiza la búsqueda no es un usuario administrador), el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): nombre(String), codCategoria(Long), admin(boolean), startIndex(int), count(int) -> ("madrid", valor no libre, true, 0, 5);
+f) Saída(s): objeto de tipo EventoBlock
+g) Inicialización: objeto de tipo Categoria y Evento
+
+92.
+a) Código: "PR-IN-092"
+b) Unidade: ApuestaService
+c) Función/método: bet()
+d) Motivación: creación de una apuesta con valores correctos. Se consideran valores correctos: un código de opción de apuesta existente, una cantidad positiva y un código de usuario existente.
+e) Entrada(s): opcion(Long), cantidad(double), userId(Long) -> (valor no libre, 2, valor no libre)
+f) Saída(s): objeto de tipo Apuesta
+g) Inicialización: objeto de tipo Categoria
+
+93.
+a) Código: "PR-IN-093"
+b) Unidade: ApuestaService
+c) Función/método: selectWinnerBetOptions()
+d) Motivación: marcado de las opciones ganadoras de una apuesta con valores correctos. Se consideran valores correctos: un código de tipo de apuesta existente y una lista de códigos de opciones de apuesta existentes.
+e) Entrada(s): codTipoApuesta(Long), opcionesGanadoras(List<Long>) -> (valor no libre, valor no libre)
+f) Saída(s): Lista de opciones de apuesta
+g) Inicialización: objeto de tipo Categoria
+
+94.
+a) Código: "PR-IN-094"
+b) Unidade: ApuestaService
+c) Función/método: findUserBets()
+d) Motivación: búsqueda de las apuestas realizadas por un usuario concreto con valores correctos. Se consideran valores correctos: un código de usuario existente, el valor del campo startIndex 0 o positivo y el valor del campo count positivo.
+e) Entrada(s): userId(Long), startIndex(int), count(int) -> (valor no libre, 0, 5)
+f) Saída(s): objeto de tipo ApuestaBlock
+g) Inicialización: objeto de tipo Categoria
+
+
+¿En función/método metemos el nombre del método del test o del service?

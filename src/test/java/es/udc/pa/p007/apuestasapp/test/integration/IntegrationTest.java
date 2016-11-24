@@ -86,7 +86,7 @@ public class IntegrationTest {
 		eventoDao.save(eventoPasado);
 	}
 	
-	//PR-UN-090
+	//PR-IN-090
 	@Test
 	public void testFindEventosWithoutAdmin()
 			throws  DuplicateInstanceException, InstanceNotFoundException, InputValidationException {
@@ -107,7 +107,7 @@ public class IntegrationTest {
 		assertEquals(expectedEventos.size(), foundEventos.size());
 	}
 	
-	//PR-UN-091
+	//PR-IN-091
 	@Test
 	public void testFindEventosWithAdmin()
 			throws  DuplicateInstanceException, InstanceNotFoundException, InputValidationException {
@@ -129,7 +129,7 @@ public class IntegrationTest {
 		assertEquals(expectedEventos.size(), foundEventos.size());
 	}
 	
-	//PR-UN-092
+	//PR-IN-092
 	@Test
 	public void testBet()
 			throws  DuplicateInstanceException, InstanceNotFoundException, InputValidationException, StartedEventException {
@@ -155,7 +155,7 @@ public class IntegrationTest {
 		assertEquals(apuesta, foundApuesta);
 	}
 	
-	//PR-UN-093
+	//PR-IN-093
 	@Test
 	public void testSelectWinnerBetOptions()
 			throws  DuplicateInstanceException, InstanceNotFoundException, InputValidationException, StartedEventException, NotStartedEventException, ValidateOptionsException, InterruptedException {
@@ -197,7 +197,7 @@ public class IntegrationTest {
 		assertTrue(cont3 == 0);
 	}
 	
-	//PR-UN-095
+	//PR-IN-094
 	@Test
 	public void testFindUserBets()
 			throws  DuplicateInstanceException, InstanceNotFoundException, InputValidationException, StartedEventException, NotStartedEventException, ValidateOptionsException, InterruptedException {
