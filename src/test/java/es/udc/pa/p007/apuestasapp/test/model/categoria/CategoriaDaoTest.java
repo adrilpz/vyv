@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
 import es.udc.pa.p007.apuestasapp.model.categoria.CategoriaDao;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
+import net.java.quickcheck.generator.iterable.Iterables;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE })
@@ -107,5 +108,29 @@ public class CategoriaDaoTest {
 		
 		//Aserción
 		assertEquals(foundCategorias.size(), 2);
+	}
+	
+	//PR-UN-097
+	@Test 
+	public void testGenerator(){
+		for(Categoria categoria : Iterables.toIterable(new CategoriaGenerator())){
+			Categoria newCategoria = new Categoria(categoria.getNombre());
+			assertEquals(categoria.getNombre(), newCategoria.getNombre());
+		}
+	}
+	
+	//PR-UN-098
+	@Test
+	public void testSaveRandomCategories() throws InstanceNotFoundException{
+		//Setup
+		for(Categoria categoria : Iterables.toIterable(new CategoriaGenerator())){
+			
+			//Llamada
+			categoriaDao.save(categoria);
+
+			//Aserción
+			Categoria foundCategoria= categoriaDao.find(categoria.getCodCategoria());
+			assertEquals(categoria, foundCategoria);
+		}
 	}
 }

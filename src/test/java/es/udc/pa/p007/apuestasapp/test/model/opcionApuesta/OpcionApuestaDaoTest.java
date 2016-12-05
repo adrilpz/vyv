@@ -27,7 +27,9 @@ import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuestaDao;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuestaDao;
+import es.udc.pa.p007.apuestasapp.test.model.tipoApuesta.TipoApuestaGenerator;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
+import net.java.quickcheck.generator.iterable.Iterables;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE })
@@ -195,6 +197,36 @@ public class OpcionApuestaDaoTest {
 		
 		//Aserción
 		assertFalse(validated);
+	}
+
+	//PR-UN-101
+	@Test 
+	public void testGenerator(){
+		for(OpcionApuesta o : Iterables.toIterable(new OpcionApuestaGenerator())){
+			OpcionApuesta newOpcionApuesta = new OpcionApuesta(o.getResultado(), o.getCuota(), o.isGanadora(), o.getTipoApuesta());
+			assertEquals(o.getResultado(), newOpcionApuesta.getResultado());
+			assertEquals(o.getCuota(), newOpcionApuesta.getCuota(), 0);
+			assertEquals(o.isGanadora(), newOpcionApuesta.isGanadora());
+			assertEquals(o.getTipoApuesta(), newOpcionApuesta.getTipoApuesta());
+		}
+	}
+	
+	//PR-UN-102
+	@Test
+	public void testSaveRandomBetOptions() throws InstanceNotFoundException{
+		//Setup
+		for(OpcionApuesta o : Iterables.toIterable(new OpcionApuestaGenerator())){
+			categoriaDao.save(o.getTipoApuesta().getEvento().getCategoria());
+			eventoDao.save(o.getTipoApuesta().getEvento());
+			tipoApuestaDao.save(o.getTipoApuesta());
+			
+			//Llamada
+			opcionApuestaDao.save(o);
+
+			//Aserción
+			OpcionApuesta foundOpcionApuesta= opcionApuestaDao.find(o.getCodOpcionApuesta());
+			assertEquals(o, foundOpcionApuesta);
+		}
 	}
 	
 }

@@ -22,7 +22,9 @@ import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.model.evento.EventoDao;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuestaDao;
+import es.udc.pa.p007.apuestasapp.test.model.evento.EventoGenerator;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
+import net.java.quickcheck.generator.iterable.Iterables;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE })
@@ -133,5 +135,33 @@ public class TipoApuestaDaoTest {
 		
 		//Aserción
 		assertEquals(foundTiposApuesta.size(), 2);
+	}
+	
+	//PR-UN-103
+	@Test 
+	public void testGenerator(){
+		for(TipoApuesta ta : Iterables.toIterable(new TipoApuestaGenerator())){
+			TipoApuesta newTipoApuesta = new TipoApuesta(ta.getPregunta(), ta.isMultiple(), ta.getEvento());
+			assertEquals(ta.getPregunta(), newTipoApuesta.getPregunta());
+			assertEquals(ta.isMultiple(), newTipoApuesta.isMultiple());
+			assertEquals(ta.getEvento(), newTipoApuesta.getEvento());
+		}
+	}
+	
+	//PR-UN-104
+	@Test
+	public void testSaveRandomBetTypes() throws InstanceNotFoundException{
+		//Setup
+		for(TipoApuesta ta : Iterables.toIterable(new TipoApuestaGenerator())){
+			categoriaDao.save(ta.getEvento().getCategoria());
+			eventoDao.save(ta.getEvento());
+			
+			//Llamada
+			tipoApuestaDao.save(ta);
+
+			//Aserción
+			TipoApuesta foundTipoApuesta= tipoApuestaDao.find(ta.getCodTipoApuesta());
+			assertEquals(ta, foundTipoApuesta);
+		}
 	}
 }

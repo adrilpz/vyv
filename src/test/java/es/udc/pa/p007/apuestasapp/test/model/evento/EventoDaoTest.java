@@ -20,7 +20,9 @@ import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
 import es.udc.pa.p007.apuestasapp.model.categoria.CategoriaDao;
 import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.model.evento.EventoDao;
+import es.udc.pa.p007.apuestasapp.test.model.categoria.CategoriaGenerator;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
+import net.java.quickcheck.generator.iterable.Iterables;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE })
@@ -123,5 +125,32 @@ public class EventoDaoTest {
 		
 		//Aserción
 		assertEquals(foundEventos.size(), 1);
+	}
+	
+	//PR-UN-099
+	@Test 
+	public void testGenerator(){
+		for(Evento e : Iterables.toIterable(new EventoGenerator())){
+			Evento newEvento = new Evento(e.getNombre(), e.getFecha(), e.getCategoria());
+			assertEquals(e.getNombre(), newEvento.getNombre());
+			assertEquals(e.getFecha(), newEvento.getFecha());
+			assertEquals(e.getCategoria(), newEvento.getCategoria());
+		}
+	}
+	
+	//PR-UN-100
+	@Test
+	public void testSaveRandomEvents() throws InstanceNotFoundException{
+		//Setup
+		for(Evento e : Iterables.toIterable(new EventoGenerator())){
+			categoriaDao.save(e.getCategoria());
+			
+			//Llamada
+			eventoDao.save(e);
+
+			//Aserción
+			Evento foundEvento= eventoDao.find(e.getCodEvento());
+			assertEquals(e, foundEvento);
+		}
 	}
 }

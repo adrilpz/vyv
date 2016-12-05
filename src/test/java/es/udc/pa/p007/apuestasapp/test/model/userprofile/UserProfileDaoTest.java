@@ -13,9 +13,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfile;
 import es.udc.pa.p007.apuestasapp.model.userprofile.UserProfileDao;
+import es.udc.pa.p007.apuestasapp.test.model.opcionApuesta.OpcionApuestaGenerator;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
+import net.java.quickcheck.generator.iterable.Iterables;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE })
@@ -112,5 +115,33 @@ public class UserProfileDaoTest {
 	public void testFindByUserLoginWithNoExistentLogin() throws InstanceNotFoundException{
 		//Llamada
 		userProfileDao.findByLoginName("");
+	}
+	
+	//PR-UN-105
+	@Test 
+	public void testGenerator(){
+		for(UserProfile u : Iterables.toIterable(new UserProfileGenerator())){
+			UserProfile newUserProfile = new UserProfile(u.getLoginName(), u.getEncryptedPassword(), u.getFirstName(), u.getLastName(), u.getEmail());
+			assertEquals(u.getLoginName(), newUserProfile.getLoginName());
+			assertEquals(u.getEncryptedPassword(), newUserProfile.getEncryptedPassword());
+			assertEquals(u.getFirstName(), newUserProfile.getFirstName());
+			assertEquals(u.getLastName(), newUserProfile.getLastName());
+			assertEquals(u.getEmail(), newUserProfile.getEmail());
+		}
+	}
+	
+	//PR-UN-106
+	@Test
+	public void testSaveRandomUserProfiles() throws InstanceNotFoundException{
+		//Setup
+		for(UserProfile u : Iterables.toIterable(new UserProfileGenerator())){
+			
+			//Llamada
+			userProfileDao.save(u);
+
+			//Aserción
+			UserProfile foundUserProfile= userProfileDao.find(u.getUserProfileId());
+			assertEquals(u, foundUserProfile);
+		}
 	}
 }

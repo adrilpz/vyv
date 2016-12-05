@@ -171,6 +171,12 @@
     		<artifactId>tapestry-webresources</artifactId>
     		<version>${tapestry.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.java.quickcheck/quickcheck -->
+		<dependency>
+		    <groupId>net.java.quickcheck</groupId>
+		    <artifactId>quickcheck</artifactId>
+		    <version>0.6</version>
+		</dependency>
     </dependencies>
 
     <build>
