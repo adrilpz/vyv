@@ -27,7 +27,6 @@ import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuesta;
 import es.udc.pa.p007.apuestasapp.model.opcionApuesta.OpcionApuestaDao;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuesta;
 import es.udc.pa.p007.apuestasapp.model.tipoApuesta.TipoApuestaDao;
-import es.udc.pa.p007.apuestasapp.test.model.tipoApuesta.TipoApuestaGenerator;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 import net.java.quickcheck.generator.iterable.Iterables;
 

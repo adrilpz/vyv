@@ -20,7 +20,6 @@ import es.udc.pa.p007.apuestasapp.model.categoria.Categoria;
 import es.udc.pa.p007.apuestasapp.model.categoria.CategoriaDao;
 import es.udc.pa.p007.apuestasapp.model.evento.Evento;
 import es.udc.pa.p007.apuestasapp.model.evento.EventoDao;
-import es.udc.pa.p007.apuestasapp.test.model.categoria.CategoriaGenerator;
 import es.udc.pojo.modelutil.exceptions.InstanceNotFoundException;
 import net.java.quickcheck.generator.iterable.Iterables;
 
