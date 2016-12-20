@@ -1,6 +1,8 @@
 language: java
 jdk: oraclejdk8
-script: mvn clean graphwalker:generate-sources install
+script: mvn install
+        mvn graphwalker:generate-sources
+        mvn test
 before_install:
         - mysqladmin -u root create pojo
         - mysqladmin -u root create pojotest
