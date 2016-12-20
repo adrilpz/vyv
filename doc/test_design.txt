@@ -880,5 +880,111 @@ e) Entrada(s): userId(Long), startIndex(int), count(int) -> (valor no libre, 0, 
 f) Saída(s): objeto de tipo ApuestaBlock
 g) Inicialización: objeto de tipo Categoria
 
+95.
+a) Código: "PR-UN-095"
+b) Unidade: Apuesta
+c) Función/método: generator()
+d) Motivación: almacenar una apuesta en base de datos con valores correctos. Se consideran valores correctos: una apuesta válida.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s): -
+g) Inicialización: 
 
+96.
+a) Código: "PR-UN-096"
+b) Unidade: Apuesta
+c) Función/método: saveRandomBets()
+d) Motivación: almacenar una apuesta en base de datos con valores correctos. Se consideran valores correctos: una apuesta válida.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s): -
+g) Inicialización:
+
+97.
+a) Código: "PR-UN-097"
+b) Unidade: Categoria
+c) Función/método: generator()
+d) Motivación: almacenar una categoria en base de datos con valores correctos. Se consideran valores correctos: una categoria válida.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+98.
+a) Código: "PR-UN-098"
+b) Unidade: Categoria
+c) Función/método: saveRandomCategories()
+d) Motivación: almacenar una categoria en base de datos con valores correctos. Se consideran valores correctos: una categoria válida.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+99.
+a) Código: "PR-UN-099"
+b) Unidade: Evento
+c) Función/método: generator()
+d) Motivación: almacenar un evento en base de datos con valores correctos. Se consideran valores correctos: un evento válido.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+100.
+a) Código: "PR-UN-0100"
+b) Unidade: Evento
+c) Función/método: saveRandomEvents()
+d) Motivación: almacenar un evento en base de datos con valores correctos. Se consideran valores correctos: un evento válido.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+101.
+a) Código: "PR-UN-0101"
+b) Unidade: OpcionApuesta
+c) Función/método: generator()
+d) Motivación: almacenar una opcion de apuesta en base de datos con valores correctos. Se consideran valores correctos: una opcion de apuesta válida.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+102.
+a) Código: "PR-UN-0102"
+b) Unidade: OpcionApuesta
+c) Función/método: saveRandomBetOptions()
+d) Motivación: almacenar una opcion de apuesta en base de datos con valores correctos. Se consideran valores correctos: una opcion de apuesta válida.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+103.
+a) Código: "PR-UN-0103"
+b) Unidade: TipoApuesta
+c) Función/método: saveRandomBetOptions()
+d) Motivación: almacenar un tipo de apuesta en base de datos con valores correctos. Se consideran valores correctos: un tipo de apuesta válido.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+104.
+a) Código: "PR-UN-0104"
+b) Unidade: TipoApuesta
+c) Función/método: saveRandomBetTypes()
+d) Motivación: almacenar un tipo de apuesta en base de datos con valores correctos. Se consideran valores correctos: un tipo de apuesta válido.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+105.
+a) Código: "PR-UN-0105"
+b) Unidade: UserProfile
+c) Función/método: saveRandomBetTypes()
+d) Motivación: almacenar un perfil de usuario en base de datos con valores correctos. Se consideran valores correctos: un perfil de usuario válido.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
+
+106.
+a) Código: "PR-UN-0106"
+b) Unidade: UserProfile
+c) Función/método: saveRandomUserProfiles()
+d) Motivación: almacenar un perfil de usuario en base de datos con valores correctos. Se consideran valores correctos: un perfil de usuario válido.
+e) Entrada(s): entity(E) -> (valores aleatorios)
+f) Saída(s):
+g) Inicialización:
 ¿En función/método metemos el nombre del método del test o del service?
