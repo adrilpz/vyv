@@ -48,6 +48,7 @@
         <sqlMavenPlugin.version>1.5</sqlMavenPlugin.version>
         <mavenAssemblyPlugin.version>2.4</mavenAssemblyPlugin.version>
         <jettyMavenPlugin>8.1.15.v20140411</jettyMavenPlugin>
+        <graphwalker.version>3.4.2</graphwalker.version>
                 
     </properties>
 
@@ -176,6 +177,27 @@
 		    <groupId>net.java.quickcheck</groupId>
 		    <artifactId>quickcheck</artifactId>
 		    <version>0.6</version>
+		</dependency>
+		<!-- Graphwalker -->
+		<dependency>
+		   <groupId>org.graphwalker</groupId>
+		   <artifactId>graphwalker-core</artifactId>
+		   <version>${graphwalker.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graphwalker</groupId>
+			<artifactId>graphwalker-io</artifactId>
+			<version>${graphwalker.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graphwalker</groupId>
+			<artifactId>graphwalker-java</artifactId>
+			<version>${graphwalker.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graphwalker</groupId>
+			<artifactId>graphwalker-maven-plugin</artifactId>
+			<version>${graphwalker.version}</version>
 		</dependency>
     </dependencies>
 
@@ -421,11 +443,21 @@
 			    <configuration>
 			        <targetClasses>
 			            <param>es.udc.pa.p007.apuestasapp.model*</param>
-			        </targetClasses>
+			           </targetClasses>
 			        <targetTests>
 			            <param>es.udc.pa.p007.apuestasapp.test*</param>
 			        </targetTests>
+			        <excludedClasses>
+			        	<excludedClasse>es.udc.pa.p007.apuestasapp.model.userservice.util*</excludedClasse>
+			        </excludedClasses>
 			    </configuration>
+			</plugin>
+			
+			<!-- Graphwalker -->
+			<plugin>
+				<groupId>org.graphwalker</groupId>
+				<artifactId>graphwalker-maven-plugin</artifactId>
+				<version>${graphwalker.version}</version>
 			</plugin>
 			
 			<!-- Jacoco -->
