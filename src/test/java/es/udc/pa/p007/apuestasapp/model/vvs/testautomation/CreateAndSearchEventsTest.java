@@ -101,10 +101,10 @@ public class CreateAndSearchEventsTest extends ExecutionContext implements Creat
 	public void e_CreateEvent() {
 		System.out.println("Running: e_CreateEvent");
 		//Inicialización
-		fecha = Calendar.getInstance();
-		fecha.set(2017, 11, 24);
-		futbol = new Categoria("Fútbol");
-		categoriaDao.save(futbol);
+		//fecha = Calendar.getInstance();
+		//fecha.set(2017, 11, 24);
+		//futbol = new Categoria("Fútbol");
+		//categoriaDao.save(futbol);
 		
 		//Llamada
 		//evento = apuestasService.createEvento("Barsa - Madrid", fecha, futbol.getCodCategoria());
