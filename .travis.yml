@@ -1,10 +1,11 @@
 language: java
 jdk: oraclejdk8
-script:
-        - mvn graphwalker:generate-sources
-        - mvn install
 before_install:
         - mysqladmin -u root create pojo
         - mysqladmin -u root create pojotest
         - mysql -u root -e "GRANT ALL PRIVILEGES ON pojo.* to pojo@localhost IDENTIFIED BY 'pojo';"
         - mysql -u root -e "GRANT ALL PRIVILEGES ON pojotest.* to pojo@localhost IDENTIFIED BY 'pojo'"
+install: true
+script:
+        - mvn graphwalker:generate-sources
+        - mvn test
