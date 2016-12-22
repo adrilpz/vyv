@@ -59,7 +59,7 @@ CREATE TABLE TipoApuesta (
 
 CREATE TABLE OpcionApuesta ( 
 	resultado VARCHAR(30) NOT NULL,
-	cuota FLOAT NOT NULL,
+	cuota DOUBLE NOT NULL,
 	codOpcionApuesta BIGINT NOT NULL AUTO_INCREMENT,
 	ganadora BIT,
 	codTipoApuesta BIGINT NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE OpcionApuesta (
 
 CREATE TABLE Apuesta ( 
 	codOpcionApuesta BIGINT NOT NULL,
-	cantidad FLOAT NOT NULL,
+	cantidad DOUBLE NOT NULL,
 	codApuesta BIGINT NOT NULL AUTO_INCREMENT,
 	usrId BIGINT NOT NULL,
     	fechaApuesta TIMESTAMP NOT NULL,
