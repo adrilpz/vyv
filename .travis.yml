@@ -8,4 +8,5 @@ before_install:
 install: true
 script:
         - mvn graphwalker:generate-sources
+        - mvn compile
         - mvn test
